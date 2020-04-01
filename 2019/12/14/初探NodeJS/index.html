@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/logo.png">
+  <link rel="mask-icon" href="/uploads/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"scrollpercent":true,"enable":true,"sidebar":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="启动NodeJs APP1234567891011121314151617181920212223242526272829&#x2F;&#x2F;导入核心模块var http&#x3D;require(&#39;http&#39;);var fs&#x3D;require(&#39;fs&#39;);&#x2F;&#x2F;创建服务var server &#x3D; http.createServer();&#x2F;&#x2F;事件绑定server.on(&#39;request&#39;,function(request,res">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探NodeJS">
+<meta property="og:url" content="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/index.html">
+<meta property="og:site_name" content="初出茅庐">
+<meta property="og:description" content="启动NodeJs APP1234567891011121314151617181920212223242526272829&#x2F;&#x2F;导入核心模块var http&#x3D;require(&#39;http&#39;);var fs&#x3D;require(&#39;fs&#39;);&#x2F;&#x2F;创建服务var server &#x3D; http.createServer();&#x2F;&#x2F;事件绑定server.on(&#39;request&#39;,function(request,res">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/%E5%88%9D%E6%8E%A2NodeJs/%E8%A7%84%E8%8C%83%E7%AE%A1%E8%BE%96.png">
+<meta property="og:image" content="c:/Users/w9709/Desktop/%E6%88%91%E7%9A%84github/kakapiya/source/_posts/%E5%88%9D%E6%8E%A2NodeJS/Byfunc2data.png">
+<meta property="article:published_time" content="2019-12-14T09:19:19.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:42:11.153Z">
+<meta property="article:author" content="汪世奇">
+<meta property="article:tag" content="NodeJs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/%E5%88%9D%E6%8E%A2NodeJs/%E8%A7%84%E8%8C%83%E7%AE%A1%E8%BE%96.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>初探NodeJS | 初出茅庐</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">初出茅庐</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如履薄冰</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探NodeJS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 17:19:19" itemprop="dateCreated datePublished" datetime="2019-12-14T17:19:19+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:42:11" itemprop="dateModified" datetime="2020-04-01T15:42:11+08:00">2020-04-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="启动NodeJs-APP"><a href="#启动NodeJs-APP" class="headerlink" title="启动NodeJs APP"></a>启动NodeJs APP</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导入核心模块</span></span><br><span class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">//事件绑定</span></span><br><span class="line">server.on(<span class="string">'request'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//查看请求地址</span></span><br><span class="line">    <span class="comment">//console.log(request.url);</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//设置响应头</span></span><br><span class="line">    response.setHeader(<span class="string">'Content-type'</span>,<span class="string">'text/html;charset=utf-8'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//响应请求</span></span><br><span class="line">    <span class="keyword">if</span>(request.url == <span class="string">'/'</span>)&#123;</span><br><span class="line">    fs.readFile(<span class="string">'./index.html'</span>,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">        response.end(data);</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//服务器监听8080端口</span></span><br><span class="line">server.listen(<span class="number">8080</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"请访问locoalhost:8080"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="渲染数据"><a href="#渲染数据" class="headerlink" title="渲染数据"></a>渲染数据</h1><h2 id="json的转换"><a href="#json的转换" class="headerlink" title="json的转换"></a>json的转换</h2><p>序列化与反序列化</p>
+<p>将数组变成字符串传送，然后再变成数组</p>
+<p>json的格式：双引号框住值，字符串值还需要一层单引号</p>
+<p><code>JSON.stringify()</code> </p>
+<p><code>JSON.parse()</code></p>
+<h2 id="客户端渲染数据"><a href="#客户端渲染数据" class="headerlink" title="客户端渲染数据"></a>客户端渲染数据</h2><p>利用ajax不断向服务器请求内容：</p>
+<ol>
+<li>客户端发送请求给服务端</li>
+<li>服务端收到请求，响应请求</li>
+<li>浏览器接收到页面开始解析</li>
+<li>发现需要其他资源，再次向服务器发送请求</li>
+<li>服务器再次响应请求</li>
+<li>浏览器利用资源，生成最终页面</li>
+</ol>
+<h2 id="服务端渲染数据"><a href="#服务端渲染数据" class="headerlink" title="服务端渲染数据"></a><strong>服务端渲染数据</strong></h2><p>art-template模板引擎</p>
+<ol>
+<li>客户端发送请求给服务端</li>
+<li>服务端收到请求，准备响应请求</li>
+<li>开始解析页面，利用模板引擎将动态部分内容填充</li>
+<li>返回解析好的页面。</li>
+</ol>
+<h2 id="解决异步带来的i丢失问题"><a href="#解决异步带来的i丢失问题" class="headerlink" title="解决异步带来的i丢失问题"></a>解决异步带来的i丢失问题</h2><p>利用闭包，匿名函数的自调用，形成伪命名空间，保存i</p>
+<p><code>response.end()</code>要放置在回调函数中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">window,undefined </span>)</span>&#123;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="W3C和ECMAScript及CommonJS"><a href="#W3C和ECMAScript及CommonJS" class="headerlink" title="W3C和ECMAScript及CommonJS"></a>W3C和ECMAScript及CommonJS</h2><p>W3C的规范是一个浏览器的生产标准，告诉浏览器应该生成什么规格的东西，提供什么API。</p>
+<p>ECMAScript是告诉浏览器怎么写解析引擎解析JS代码。</p>
+<p>CommonJS用于除了浏览器外的所有平台规范，以显示API的更广泛适用性。</p>
+<p><img src="./%E5%88%9D%E6%8E%A2NodeJs/%E8%A7%84%E8%8C%83%E7%AE%A1%E8%BE%96.png" alt="规范管辖"></p>
+<h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><p>模块的导出</p>
+<h2 id="exports的使用"><a href="#exports的使用" class="headerlink" title="exports的使用"></a>exports的使用</h2><p>module.exports</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导出内容为函数</span></span><br><span class="line"><span class="built_in">module</span>.exports = fucntion()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导出内容为对象</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>exports：module.exports的引用</p>
+<h2 id="NodeJS模块加载规则"><a href="#NodeJS模块加载规则" class="headerlink" title="NodeJS模块加载规则"></a>NodeJS模块加载规则</h2><ol>
+<li>核心模块</li>
+<li>第三方模块，不断地往上级找模块目录</li>
+<li>自定义模块加载</li>
+</ol>
+<h2 id="模块化思想"><a href="#模块化思想" class="headerlink" title="模块化思想"></a>模块化思想</h2><ol>
+<li>服务启动</li>
+<li>项目路由<ol>
+<li>加载主页</li>
+<li>加载静态资源</li>
+</ol>
+</li>
+<li>业务逻辑</li>
+</ol>
+<h2 id="回调函数导出数据"><a href="#回调函数导出数据" class="headerlink" title="回调函数导出数据"></a>回调函数导出数据</h2><p>export失效后的解决方案</p>
+<ol>
+<li>在导出数据xx处，声明一个export方法xx.getdata()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">moudule.exports.getdata = <span class="function"><span class="keyword">function</span>(<span class="params">calls</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将获取信息的语句放入方法中</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">moudule.exports.getdata = <span class="function"><span class="keyword">function</span>(<span class="params">calls</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//从数据库中获得数据</span></span><br><span class="line">    <span class="keyword">var</span> sql = <span class="string">'select * from users'</span>;</span><br><span class="line">    connection.query(sql,<span class="function"><span class="keyword">function</span>(<span class="params">err,sql_data</span>)</span>&#123;  </span><br><span class="line">    </span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在导入处调用xx.getdata()方法，JS中函数可以作为值传递，利用此特性，getdata方法的传参为匿名函数。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//getdata方法的传参为匿名函数</span></span><br><span class="line">xx.getdata(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在xx.getdata()声明处，调用匿名函数</li>
+</ol>
+<p>注：若没有异步，直接return sql_data即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">moudule.exports.getdata = <span class="function"><span class="keyword">function</span>(<span class="params">calls</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//从数据库中获得数据</span></span><br><span class="line">    <span class="keyword">var</span> sql = <span class="string">'select * from users'</span>;</span><br><span class="line">    connection.query(sql,<span class="function"><span class="keyword">function</span>(<span class="params">err,sql_data</span>)</span>&#123;  </span><br><span class="line">    </span><br><span class="line">        <span class="comment">//调用匿名函数，将sql_data作为实参传入</span></span><br><span class="line">        calls(sql_data);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>对匿名函数进行传参设置，即声明导入处的calls(sql_data)，一般情况下应该先声明，再调用，但是这里的编写逻辑是先调用，然后再补充编写。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//getdata方法的传参为匿名函数</span></span><br><span class="line">xx.getdata(<span class="function"><span class="keyword">function</span>(<span class="params">datas</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 此时对calls函数声明完成</span></span><br><span class="line">    <span class="built_in">console</span>.log(datas);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>因为实参传入calls，就要到函数的声明处执行，这样实参就被带到函数声明处了，也就完成了从导出端到导入端的数据传送,</li>
+<li>利用回调函数calls完成数据导出，最终完成，这么麻烦的根本原因是因为异步，必须等数据产生处的异步函数执行完了再返回，而且数据导入处必须等待生产结束，它的函数才能返回，它才能继续执行。</li>
+</ol>
+<p><img src="C:/Users/w9709/Desktop/%E6%88%91%E7%9A%84github/kakapiya/source/_posts/%E5%88%9D%E6%8E%A2NodeJS/Byfunc2data.png" alt="利用回调函数传递数据流程图"></p>
+<h1 id="客户端响应"><a href="#客户端响应" class="headerlink" title="客户端响应"></a>客户端响应</h1><h2 id="获取请求方式"><a href="#获取请求方式" class="headerlink" title="获取请求方式"></a>获取请求方式</h2><p><code>request.method</code></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(request.method=<span class="string">"POST"</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(request.method=<span class="string">"GET"</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="解析请求方式"><a href="#解析请求方式" class="headerlink" title="解析请求方式"></a>解析请求方式</h2><p>Node核心模块url</p>
+<p>url.parse() 解析url为一个对象</p>
+<h2 id="promise实战"><a href="#promise实战" class="headerlink" title="promise实战"></a>promise实战</h2><p>解决问题：回调地狱，实际上还是使用了回调函数，只不过是便于管理了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">基本原理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//new 对象p1，使用了构造函数promise()</span></span><br><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">res, rej</span>) </span>&#123;</span><br><span class="line">    fs.readFile(<span class="string">'./a.txt'</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            rej(err);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//p1对象的then方法，使得读取成功后可以顺序执行</span></span><br><span class="line">p1.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">应用方式：文件读取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params">files</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">success,error</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//该部分是异步操作，最终目的是利用success返回数据给promise对象</span></span><br><span class="line">        <span class="comment">//-------------------------------------</span></span><br><span class="line">        fs.readFile(files,<span class="string">'utf8'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(err)&#123;</span><br><span class="line">                error(err);</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               success(data);</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">//-------------------------------------</span></span><br><span class="line">             </span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  1.fun构造了Promise对象。</span></span><br><span class="line"><span class="comment">  2.调用then方法，传入两个回调函数</span></span><br><span class="line"><span class="comment">  3.利用两个回调函数可以取出data数据或者err数据并进行下一步操作</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">fun(<span class="string">'./a.txt'</span>)</span><br><span class="line"></span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="keyword">return</span>(fun(<span class="string">'./b.txt'</span>));</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">    <span class="keyword">return</span>(fun(<span class="string">'./c.txt'</span>));</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="promise的执行流程"><a href="#promise的执行流程" class="headerlink" title="promise的执行流程"></a>promise的执行流程</h3><ol>
+<li>创建有名函数构造第一个promise对象</li>
+<li>传值给对象</li>
+<li>对象读取值，返回两种情况</li>
+<li>调用then方法处理两种情况</li>
+<li>return执行有名函数，构造下一个promise对象</li>
+</ol>
+<h1 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h1><p><code>$(&#39;#p&#39;).width(300).css(&#39;background&#39;,&#39;red&#39;).height(500);</code></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>jquery对象调用方法后，仍然是jquery对象，可以继续调用，链式操作的本质就是<code>return this</code></p>
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入自定义链式操作模块</span></span><br><span class="line"><span class="keyword">var</span> db = <span class="built_in">require</span>(<span class="string">"./db"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//链式操作</span></span><br><span class="line">db.where(<span class="string">'id=11'</span>).select();</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//db.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导出一个db对象</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//声明wh属性是为了链式操作时保存数据</span></span><br><span class="line">    wh:<span class="literal">undefined</span>,</span><br><span class="line">    where:<span class="function"><span class="keyword">function</span>(<span class="params">wh</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//一旦调用where，传参wh就赋值给属性wh了</span></span><br><span class="line">        <span class="keyword">this</span>.wh=wh;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//调用完之后需要返回值(db对象),给select使用</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//select作为链式操作的最后一环，不能有return this</span></span><br><span class="line">    select:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//where语句不是必须</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.wh == <span class="literal">undefined</span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> sql = <span class="string">"select * from xx "</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> sql = <span class="string">"select * from xx where "</span>+ <span class="keyword">this</span>.wh;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//重置wh，避免影响下一次链式操作</span></span><br><span class="line">        <span class="keyword">this</span>.wh = <span class="literal">undefined</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    还可以写更多的方法</span></span><br><span class="line"><span class="comment">     upadte:function()&#123;</span></span><br><span class="line"><span class="comment">     &#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NodeJs/" rel="tag"><i class="fa fa-tag"></i> NodeJs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/04/Blog/" rel="prev" title="My first Blog">
+      <i class="fa fa-chevron-left"></i> My first Blog
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/20/Js%E5%9F%BA%E7%A1%80/" rel="next" title="JS基础">
+      JS基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#启动NodeJs-APP"><span class="nav-number">1.</span> <span class="nav-text">启动NodeJs APP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#渲染数据"><span class="nav-number">2.</span> <span class="nav-text">渲染数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#json的转换"><span class="nav-number">2.1.</span> <span class="nav-text">json的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端渲染数据"><span class="nav-number">2.2.</span> <span class="nav-text">客户端渲染数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端渲染数据"><span class="nav-number">2.3.</span> <span class="nav-text">服务端渲染数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决异步带来的i丢失问题"><span class="nav-number">2.4.</span> <span class="nav-text">解决异步带来的i丢失问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3C和ECMAScript及CommonJS"><span class="nav-number">2.5.</span> <span class="nav-text">W3C和ECMAScript及CommonJS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模块"><span class="nav-number">3.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#exports的使用"><span class="nav-number">3.1.</span> <span class="nav-text">exports的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeJS模块加载规则"><span class="nav-number">3.2.</span> <span class="nav-text">NodeJS模块加载规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化思想"><span class="nav-number">3.3.</span> <span class="nav-text">模块化思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数导出数据"><span class="nav-number">3.4.</span> <span class="nav-text">回调函数导出数据</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#客户端响应"><span class="nav-number">4.</span> <span class="nav-text">客户端响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取请求方式"><span class="nav-number">4.1.</span> <span class="nav-text">获取请求方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">4.1.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解析请求方式"><span class="nav-number">4.2.</span> <span class="nav-text">解析请求方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#promise实战"><span class="nav-number">4.3.</span> <span class="nav-text">promise实战</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#promise的执行流程"><span class="nav-number">4.3.1.</span> <span class="nav-text">promise的执行流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链式操作"><span class="nav-number">5.</span> <span class="nav-text">链式操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">5.0.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子-1"><span class="nav-number">5.0.2.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="汪世奇"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">汪世奇</p>
+  <div class="site-description" itemprop="description">阅读·思考·练习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kakapiya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kakapiya" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:w970934230@gmail.com" title="E-Mail → mailto:w970934230@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">汪世奇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
