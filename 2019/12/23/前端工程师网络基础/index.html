@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/logo.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/logo.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/logo.png">
-  <link rel="mask-icon" href="/uploads/logo.png" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -29,13 +31,13 @@
 <meta property="og:site_name" content="初出茅庐">
 <meta property="og:description" content="AJAX前端主动向后端发送请求，不需要刷新 12345678var xhr &#x3D; new XMLHttpRequest();xhr.onreadystatechange &#x3D; function()&amp;#123;    if(xhr.readyState&#x3D;&#x3D;4)&amp;#123;        console.log(xhr.responseText);    &amp;#125;&amp;#125;xhr.open(&#39;get">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%5C%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 <meta property="article:published_time" content="2019-12-23T05:36:09.000Z">
-<meta property="article:modified_time" content="2020-04-01T07:18:00.907Z">
+<meta property="article:modified_time" content="2020-04-01T10:43:38.721Z">
 <meta property="article:author" content="汪世奇">
-<meta property="article:tag" content="学习日记">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%5C%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">
 
@@ -130,17 +132,22 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-items">
+
+    <a href="/items" rel="section"><i class="fa fa-sitemap fa-fw"></i>项目</a>
 
   </li>
   </ul>
@@ -201,8 +208,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:18:00" itemprop="dateModified" datetime="2020-04-01T15:18:00+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-01 18:43:38" itemprop="dateModified" datetime="2020-04-01T18:43:38+08:00">2020-04-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
 
           
 
@@ -221,16 +237,13 @@
 <h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>传输层，字节流服务，报文段。</p>
 <h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p>实现原因：为了准确无误的传达数据至目标（大文件）</p>
 <ol>
-<li><p>发送端首先发送一个带 SYN 标志的数据包给对方。</p>
-</li>
-<li><p>接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。</p>
-</li>
-<li><p>发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。</p>
-</li>
-<li><p>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</p>
-</li>
+<li>发送端首先发送一个带 SYN 标志的数据包给对方。</li>
+<li>接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。</li>
+<li>发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。</li>
+<li>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</li>
 </ol>
-<p><img src="%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%5C%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="图解三次握手"></p>
+<img src="/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class="">
+
 <h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><h3 id="data和end事件"><a href="#data和end事件" class="headerlink" title="data和end事件"></a>data和end事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">request.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">che</span>)</span>&#123;</span><br><span class="line"><span class="comment">//数据的分批传送</span></span><br><span class="line">	data += che;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">request.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//分批传送完成</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
     </div>
@@ -238,30 +251,11 @@
     
     
     
-        
-
-  <div class="followme">
-    <p>欢迎关注我的其它发布渠道</p>
-
-    <div class="social-list">
-
-        <div class="social-item">
-          <a target="_blank" class="social-link" href="/atom.xml">
-            <span class="icon">
-              <i class="fa fa-rss"></i>
-            </span>
-
-            <span class="label">RSS</span>
-          </a>
-        </div>
-    </div>
-  </div>
-
 
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 学习日记</a>
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fa fa-tag"></i> 计算机网络</a>
           </div>
 
         
@@ -270,12 +264,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/20/Js%E5%9F%BA%E7%A1%80/" rel="prev" title="JS基础">
-      <i class="fa fa-chevron-left"></i> JS基础
+    <a href="/2019/12/20/%E5%88%9D%E6%8E%A2Express/" rel="prev" title="初探Express">
+      <i class="fa fa-chevron-left"></i> 初探Express
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/01/%E5%88%9D%E6%8E%A2Express/" rel="next" title="初探Express">
-      初探Express <i class="fa fa-chevron-right"></i>
+    <a href="/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/" rel="next" title="通用管理器">
+      通用管理器 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -351,14 +345,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

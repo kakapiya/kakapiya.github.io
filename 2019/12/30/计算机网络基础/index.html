@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"scrollpercent":true,"enable":true,"sidebar":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="计算机网络的状态：计算机的互联、自治位和字节：速率和存储容量的单位 计算机网络复习-七层概览 4个时延 时延带宽积 RTT 2个利用率 吞吐量  七层OSI参考模型口诀：物联网叔会使用 物理层、数据链路层、网络层、传输层、会话层、表示层、应用层 端到端和点到点：河流层(上四层)和河床层(下三层) 应用层能使得用户产生流量的服务 表示层 数据格式变换  数据加密解密  数据压缩和恢复   会话层想表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络基础">
+<meta property="og:url" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="初出茅庐">
+<meta property="og:description" content="计算机网络的状态：计算机的互联、自治位和字节：速率和存储容量的单位 计算机网络复习-七层概览 4个时延 时延带宽积 RTT 2个利用率 吞吐量  七层OSI参考模型口诀：物联网叔会使用 物理层、数据链路层、网络层、传输层、会话层、表示层、应用层 端到端和点到点：河流层(上四层)和河床层(下三层) 应用层能使得用户产生流量的服务 表示层 数据格式变换  数据加密解密  数据压缩和恢复   会话层想表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230232306960.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230233404805.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231224606676.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231225657571.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200101130459535.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102102951542.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102105913174.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110022374.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110754092.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113011364.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113239869.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102212958453.png">
+<meta property="article:published_time" content="2019-12-30T12:35:24.000Z">
+<meta property="article:modified_time" content="2020-04-01T11:28:09.986Z">
+<meta property="article:author" content="汪世奇">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230232306960.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机网络基础 | 初出茅庐</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">初出茅庐</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如履薄冰</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-items">
+
+    <a href="/items" rel="section"><i class="fa fa-sitemap fa-fw"></i>项目</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机网络基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-30 20:35:24" itemprop="dateCreated datePublished" datetime="2019-12-30T20:35:24+08:00">2019-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:28:09" itemprop="dateModified" datetime="2020-04-01T19:28:09+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>计算机网络的状态：计算机的互联、自治<br>位和字节：速率和存储容量的单位</p>
+<h1 id="计算机网络复习-七层概览"><a href="#计算机网络复习-七层概览" class="headerlink" title="计算机网络复习-七层概览"></a>计算机网络复习-七层概览</h1><ol>
+<li>4个时延</li>
+<li>时延带宽积</li>
+<li>RTT</li>
+<li>2个利用率</li>
+<li>吞吐量</li>
+</ol>
+<h2 id="七层OSI参考模型"><a href="#七层OSI参考模型" class="headerlink" title="七层OSI参考模型"></a>七层OSI参考模型</h2><p>口诀：物联网叔会使用</p>
+<p>物理层、数据链路层、网络层、传输层、会话层、表示层、应用层</p>
+<p>端到端和点到点：河流层(上四层)和河床层(下三层)</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>能使得用户产生流量的服务</p>
+<h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><ol>
+<li><p>数据格式变换</p>
+</li>
+<li><p>数据加密解密</p>
+</li>
+<li><p>数据压缩和恢复</p>
+</li>
+</ol>
+<h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p>想表示层实体提供建立连接并有序传输数据。</p>
+<p>SYN建立同步 协议：ADSP ASP</p>
+<ol>
+<li>建立、管理、终止会话</li>
+<li>使用校验点</li>
+</ol>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>两个进程的通信，端到端的通讯</p>
+<p>口诀：可差留用 </p>
+<p>可靠传输、不可靠传输、差错控制、流量控制、复用分用</p>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>发送端和接收端的速度匹配</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>协议：IP、IPX、ICMP、IDMP、ARP、RARP、OSPF</p>
+<p>口诀：陆流错拥</p>
+<ol>
+<li><p>路由选择：最佳路径</p>
+</li>
+<li><p>流量控制</p>
+</li>
+<li><p>差错控制</p>
+</li>
+<li><p>拥塞控制：</p>
+</li>
+</ol>
+<p>把分组从源端传到目的端 </p>
+<p>数据报是分组的爸爸</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>协议：SDLC、HDLC、PPP、STP</p>
+<p>把网络成的数据报组装成帧</p>
+<ol>
+<li>成帧</li>
+<li>差错控制</li>
+<li>流量控制</li>
+<li>访问控制</li>
+</ol>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>协议：Rj45、802.3</p>
+<p>用物理媒体实现比特流的透明传输。</p>
+<ol>
+<li>定义接口特性</li>
+<li>定义传输模式【单工、半双、双工】</li>
+<li>定义传输速率</li>
+<li>比特同步</li>
+<li>比特编码</li>
+</ol>
+<h2 id="TCP-IP协议栈"><a href="#TCP-IP协议栈" class="headerlink" title="TCP/IP协议栈"></a>TCP/IP协议栈</h2><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230232306960.png" class="">
+
+
+
+<h3 id="TCP-IP与OSI"><a href="#TCP-IP与OSI" class="headerlink" title="TCP/IP与OSI"></a>TCP/IP与OSI</h3><h4 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h4><ol>
+<li>分层</li>
+<li>独立协议栈</li>
+<li>异构网络的互联</li>
+</ol>
+<h4 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h4><ol>
+<li>OSI定义服务、协议、接口</li>
+<li>OSI先模型后协议</li>
+<li>TCP/IP将IP作为重要层次。</li>
+</ol>
+<h4 id="面向连接与无连接"><a href="#面向连接与无连接" class="headerlink" title="面向连接与无连接"></a>面向连接与无连接</h4><p>面向连接：</p>
+<ol>
+<li><p>建立连接</p>
+</li>
+<li><p>成功连接后，数据传输</p>
+</li>
+</ol>
+<p>无连接：直接传输数据</p>
+<h2 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h2><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230233404805.png" class="">
+
+
+
+<h1 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h1><h2 id="物理层特性"><a href="#物理层特性" class="headerlink" title="物理层特性"></a>物理层特性</h2><h3 id="机械特性"><a href="#机械特性" class="headerlink" title="机械特性"></a>机械特性</h3><p>接口所用接线器的形状和尺寸，引线数目和排列、固定和锁定装置等。</p>
+<h3 id="电气特性"><a href="#电气特性" class="headerlink" title="电气特性"></a>电气特性</h3><p>指明在接口电缆的各条线上出现的电压的范围，什么电平代表1，什么电平代表0.</p>
+<h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><p>规定接口某一条引线上出现某一电平表示的含义。</p>
+<h3 id="规程特性"><a href="#规程特性" class="headerlink" title="规程特性"></a>规程特性</h3><p>规定接口上各种信号线以及各种电平出现的先后顺序，即那根信号线先动作。</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>串行传输</p>
+<p>速度慢、费用低、适合远距离</p>
+<p>并行传输</p>
+<p>速度快、费用高、适合近距离</p>
+<h3 id="码元"><a href="#码元" class="headerlink" title="码元"></a>码元</h3><p>固定时长的信号波形（数字脉冲）</p>
+<p>M进制码元，M种状态</p>
+<h3 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h3><p>波特Baud，一秒能传输码元的数量的单位</p>
+<h3 id="码元传输速率"><a href="#码元传输速率" class="headerlink" title="码元传输速率"></a>码元传输速率</h3><p> 一秒能传输码元的数量多少</p>
+<h3 id="信息传输速率"><a href="#信息传输速率" class="headerlink" title="信息传输速率"></a>信息传输速率</h3><p>波特*一码元的比特数的多少</p>
+<p>设X为进制数，Y为Baud数,Z为信息传输速率<br>$$<br>Z=YBaud*log_2X<br>$$</p>
+<h2 id="奈氏准则与香农定理"><a href="#奈氏准则与香农定理" class="headerlink" title="奈氏准则与香农定理"></a>奈氏准则与香农定理</h2><p>这两个公式的带宽单位：Hz；常用带宽单位：bit/s</p>
+<p>内忧奈氏，外患香农</p>
+<h3 id="失真的影响因素"><a href="#失真的影响因素" class="headerlink" title="失真的影响因素"></a>失真的影响因素</h3><ol>
+<li>码元传输速率</li>
+<li>信号传输速率</li>
+<li>噪声干扰</li>
+<li>传输媒体质量</li>
+</ol>
+<h3 id="信道带宽"><a href="#信道带宽" class="headerlink" title="信道带宽"></a>信道带宽</h3><p>信道能通过的最高频率和最低频率之差</p>
+<h3 id="码间串扰"><a href="#码间串扰" class="headerlink" title="码间串扰"></a>码间串扰</h3><p>码元之间界限不清晰</p>
+<h2 id="奈氏准则"><a href="#奈氏准则" class="headerlink" title="奈氏准则"></a>奈氏准则</h2><h3 id="条件：理想低通"><a href="#条件：理想低通" class="headerlink" title="条件：理想低通"></a>条件：理想低通</h3><p>理想：无噪声</p>
+<p>低通：带宽受限，规则为低频信号能正常通过,而超过设定临界值的高频信号则被阻隔、减弱。</p>
+<h3 id="极限码元传输速率"><a href="#极限码元传输速率" class="headerlink" title="极限码元传输速率"></a>极限码元传输速率</h3><p>避免码间串扰的速率：2W Baud<br>$$<br>极限码元传输速率=2W (Baud)<br>$$<br>W为信道带宽，限制码元传输速率</p>
+<p>V为几种码元/码元的离散电平数目<br>$$<br>理想低通信道下的极限数据传输率=2Wlog_2V (b/s)<br>$$<br>信号变化能力：相位*振幅</p>
+<h2 id="香农定理"><a href="#香农定理" class="headerlink" title="香农定理"></a>香农定理</h2><p>限制信息的传输速率，限制比特率（每秒传送的bit数）</p>
+<p>信噪比：信号的平均功率/噪声的平均功率常记为S/N，dB为度量单位。<br>$$<br>信噪比(dB)=10log_10(S/N)<br>$$</p>
+<h3 id="条件：有噪声，带宽受限"><a href="#条件：有噪声，带宽受限" class="headerlink" title="条件：有噪声，带宽受限"></a>条件：有噪声，带宽受限</h3><h3 id="信道的极限传输速率"><a href="#信道的极限传输速率" class="headerlink" title="信道的极限传输速率"></a>信道的极限传输速率</h3><p>$$<br>信道的极限传输速率=Wlog_2(1+S/N)(b/s)<br>$$</p>
+<p>香农定理和奈氏准则都是一个极限值计算公式，有信噪比的时候仍需要计利用奈氏准则解决内忧问题，选择一个主要矛盾，取两极限值中的最小值。</p>
+<h2 id="基带传输与宽带传输"><a href="#基带传输与宽带传输" class="headerlink" title="基带传输与宽带传输"></a>基带传输与宽带传输</h2><p>基带传输</p>
+<p>在数字信道传输，来自信源的信号，近距离，衰减小</p>
+<p>宽带传输</p>
+<p>在模拟信道传输胡，基带信号经过载波调制后，频率范围移至较高频段，远距离，衰减大</p>
+<h3 id="编码与调制"><a href="#编码与调制" class="headerlink" title="编码与调制"></a>编码与调制</h3><p>数字数据经过数字发生器变成数字信号，编码</p>
+<p>数字数据经过调制器变成模拟信号，调制</p>
+<p>PCM编码器，模拟-数字</p>
+<p>放大器调制器，模拟-模拟</p>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><p>1、非归零</p>
+<p>2、归零</p>
+<p>3、反向不归零</p>
+<p>4、曼彻斯特编码（万字符）</p>
+<p>5、差分曼彻斯特编码（万字符 同1异0）</p>
+<p>6、4B/5B编码</p>
+<h3 id="调制方式"><a href="#调制方式" class="headerlink" title="调制方式"></a>调制方式</h3><p>调幅：有无</p>
+<p>调频：疏密</p>
+<p>调相：正弦、余弦</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231224606676.png" class="">
+
+<p>调频+调相（QAM）</p>
+<h3 id="PCM脉码调制"><a href="#PCM脉码调制" class="headerlink" title="PCM脉码调制"></a>PCM脉码调制</h3><p>抽样、量化、编码 </p>
+<h4 id="抽样"><a href="#抽样" class="headerlink" title="抽样"></a>抽样</h4><p>$$<br>f_(采样频率<em>)$\geq$2f</em>(信号最高频率_)<br>$$</p>
+<p>原理：</p>
+<p>模拟信号是由由正弦波叠加而成，想要采样到信号最高频率的信号，就需要两倍的采样频率才能采到，因为频率为周期的二分之一（从上到下就是一个频率，而一个周期还包括从下到上），想要采到完整的周期，就需要两倍频率，若非两倍，则区分不出低频部分。</p>
+<p>原因是高频声音和低频声音的正确叠加是保证音频质量的前提，但是低采样频率会使得区分不出高频，高频波段中间部分被忽视，降级为低频，失真。</p>
+<h4 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h4><p>电平幅值分级标度成数字值，将连续的电频幅值转化为离散的数字量</p>
+<h4 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h4><p>量化的结构转化为二进制编码</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231225657571.png" class="">
+
+
+
+<h3 id="模拟数据调制成模拟信号"><a href="#模拟数据调制成模拟信号" class="headerlink" title="模拟数据调制成模拟信号"></a>模拟数据调制成模拟信号</h3><p>改变频率，</p>
+<p>？载波信号</p>
+<h2 id="传输介质-媒体-一"><a href="#传输介质-媒体-一" class="headerlink" title="传输介质/媒体[一]"></a>传输介质/媒体[一]</h2><p>导向性/非导向性</p>
+<p>UTP:非屏蔽双绞线</p>
+<p>STP:屏蔽双绞线        </p>
+<h3 id="光纤"><a href="#光纤" class="headerlink" title="光纤"></a>光纤</h3><p>实心纤芯（高折射率）和包层（低折射率）</p>
+<h4 id="单模光纤"><a href="#单模光纤" class="headerlink" title="单模光纤"></a>单模光纤</h4><p>横向模式，定向性很好的激光二极管</p>
+<p>衰耗小，适合远距离</p>
+<h4 id="多模光纤"><a href="#多模光纤" class="headerlink" title="多模光纤"></a>多模光纤</h4><p>多种传播光信号模式的光纤，发光二极管</p>
+<p>易失真，适合近距离</p>
+<ol>
+<li>损耗小，中继距离长，远距离传输很经济</li>
+<li>抗雷电和电子干扰性能好</li>
+<li>无串音干扰，保密性好，不易窃听或截取数据</li>
+<li>体积小，重量轻</li>
+</ol>
+<h2 id="传输介质-媒体-二"><a href="#传输介质-媒体-二" class="headerlink" title="传输介质/媒体[二]"></a>传输介质/媒体[二]</h2><h3 id="无线电波"><a href="#无线电波" class="headerlink" title="无线电波"></a>无线电波</h3><p>方向：所有方向</p>
+<h3 id="微波"><a href="#微波" class="headerlink" title="微波"></a>微波</h3><p>方向：固定方向</p>
+<p>通信频率较高，频段范围宽，数据率很高</p>
+<p>数据率：数据传输速率（Data Transfer Rate），是指通信线上传输信息的速度，在单位时间内（通常为一秒）传输的比特数，又称比特率</p>
+<h3 id="地面微波接力通信"><a href="#地面微波接力通信" class="headerlink" title="地面微波接力通信"></a>地面微波接力通信</h3><p>中继站转发</p>
+<h4 id="卫星通信"><a href="#卫星通信" class="headerlink" title="卫星通信"></a>卫星通信</h4><p>地面微波通信的一种新应用，中继站到天上去了，即为同步卫星，一个同步卫星抵得上多个中继站。</p>
+<ol>
+<li><p>通信容量大</p>
+</li>
+<li><p>距离远</p>
+</li>
+<li><p>覆盖广</p>
+</li>
+<li><p>广播通信和多址通信</p>
+</li>
+<li><p>传播时延长</p>
+</li>
+<li><p>受气候影响大</p>
+</li>
+<li><p>误码率高</p>
+</li>
+<li><p>成本高</p>
+</li>
+</ol>
+<h4 id="红外线、激光"><a href="#红外线、激光" class="headerlink" title="红外线、激光"></a>红外线、激光</h4><p>方向：固定方向</p>
+<h2 id="物理层设备"><a href="#物理层设备" class="headerlink" title="物理层设备"></a>物理层设备</h2><h3 id="中继器"><a href="#中继器" class="headerlink" title="中继器"></a>中继器</h3><p>再生数字信号</p>
+<p>再生和还原,放大和整形</p>
+<h4 id="5-4-3规则"><a href="#5-4-3规则" class="headerlink" title="5-4-3规则"></a>5-4-3规则</h4><p>网络标准中都对信号延迟范围有具体的规定，所以中继器只能在规定的范围内工作，否则就会出现网络故障。</p>
+<p>10M以太网</p>
+<p>5个网段内</p>
+<p>4个物理层网络设备</p>
+<p>3个段可以挂工作站</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200101130459535.png" class="">
+
+
+
+<h4 id="集线器"><a href="#集线器" class="headerlink" title="集线器"></a>集线器</h4><ol>
+<li>多口中继器，对信号再生放大转发到其他所有工作中端口</li>
+<li>星型拓扑，广播</li>
+<li>大的冲突域，不能分割冲突域</li>
+<li>集线器上的设备平分带宽</li>
+</ol>
+<h1 id="数据链路层-1"><a href="#数据链路层-1" class="headerlink" title="数据链路层"></a>数据链路层</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>结点：主机、路由器</p>
+<p>链路：物理通道，有限链路，无线链路</p>
+<p>数据链路：逻辑通道，</p>
+<p>帧：协议数据单元</p>
+<h3 id="功能概述"><a href="#功能概述" class="headerlink" title="功能概述"></a>功能概述</h3><p>为网络层提供服务</p>
+<ol>
+<li><p>链路管理</p>
+</li>
+<li><p>组帧</p>
+</li>
+<li><p>流量控制</p>
+</li>
+<li><p>差错控制</p>
+</li>
+</ol>
+<h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><p>帧定界</p>
+<p>帧同步</p>
+<p>数据链路层的帧长</p>
+<p>最大传送单元MTU</p>
+<p>帧的数据部分</p>
+<ol>
+<li>字符计数法</li>
+</ol>
+<p>帧首部有计数字段</p>
+<ol start="2">
+<li>字符填充法</li>
+</ol>
+<p>SOH EOT</p>
+<ol start="3">
+<li>零比特填充法</li>
+</ol>
+<p>开始结束标志位一致</p>
+<p>5‘1’ 1‘0’</p>
+<ol start="4">
+<li>违规编码法</li>
+</ol>
+<p>用高高，低低做起止和终止</p>
+<h3 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h3><p>热噪声</p>
+<p>冲击噪声</p>
+<h4 id="位错-比特错"><a href="#位错-比特错" class="headerlink" title="位错/比特错"></a>位错/比特错</h4><p>冗余码：附加确认信息</p>
+<h5 id="检错编码"><a href="#检错编码" class="headerlink" title="检错编码"></a>检错编码</h5><ol>
+<li>奇偶校验码</li>
+</ol>
+<p>加一个1，为奇 数个1，奇校验</p>
+<ol start="2">
+<li>循环冗余码CRC</li>
+</ol>
+<p>FCS帧检验序列，即为余数</p>
+<p>最终发送的数据=要发送的数据+帧检验序列FCS</p>
+<p>发送数据添阶数个零，异或除多项式， 余数为FCS</p>
+<p>多项式*FCS=最终发送的数据</p>
+<p>无差错接收</p>
+<h5 id="纠错编码"><a href="#纠错编码" class="headerlink" title="纠错编码"></a>纠错编码</h5><p>海明码</p>
+<p>海明不等式<br>$$<br>2^r \geq K+r+1<br>$$</p>
+<p>r为冗余信息位，k为信息位， D为数据</p>
+<p>求校验码P</p>
+<ol>
+<li>先填校验码p，只能在2的阶乘数上，1···2···4···8···16···</li>
+<li>再按序填上D的值，并填上实际值，即为数据</li>
+<li>计算p1，数据位里，其二进制中第一位的有和校验码p1的第一位重合的，就是p1的可校验位</li>
+<li>令所有要检验的D异或【相同==0，相异==1】后==0，算出p1</li>
+<li>以此类推，将校验码p填入实际值</li>
+<li>填满后的实际值即为海明码</li>
+</ol>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102102951542.png" class="">
+
+
+
+<p>检错</p>
+<p>令所有校验的位异或运算</p>
+<p>得到的代码的实际值就是出错的位数</p>
+<h4 id="帧错"><a href="#帧错" class="headerlink" title="帧错"></a>帧错</h4><ol>
+<li><p>丢失</p>
+</li>
+<li><p>重复</p>
+</li>
+<li><p>失序</p>
+</li>
+</ol>
+<h2 id="流量控制-1"><a href="#流量控制-1" class="headerlink" title="流量控制"></a>流量控制</h2><h3 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h3><p>发送一个，等待收到确认，再发下一个</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102105913174.png" class="">
+
+
+
+<h3 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h3><p>收到一个确认，往前移动一格</p>
+<p>解决的问题：流量控制（窗口限制），可靠传输（重传机制）</p>
+<p>后退N帧协议 GBN</p>
+<p>选择重传协议 SR</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110022374.png" class="">
+
+
+
+<h3 id="停止等待协议的细节"><a href="#停止等待协议的细节" class="headerlink" title="停止等待协议的细节"></a>停止等待协议的细节</h3><h4 id="无差错情况"><a href="#无差错情况" class="headerlink" title="无差错情况"></a>无差错情况</h4><p>ack0 ack1反复，一次只发一个</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110754092.png" class="">
+
+
+
+<h4 id="有差错情况"><a href="#有差错情况" class="headerlink" title="有差错情况"></a>有差错情况</h4><h5 id="发送帧丢失"><a href="#发送帧丢失" class="headerlink" title="发送帧丢失"></a>发送帧丢失</h5><p>超时计时器，超时重传，设置超时时间要大于RTT</p>
+<ol>
+<li><p>发一个帧之后要拷贝副本，确认收到后才丢弃</p>
+</li>
+<li><p>发送帧，确认帧需要编号，避免丢失，重复</p>
+</li>
+</ol>
+<h5 id="ack丢失"><a href="#ack丢失" class="headerlink" title="ack丢失"></a>ack丢失</h5><p>发送方超时重传后，确认方收到重复帧会直接丢弃</p>
+<h5 id="ack迟到"><a href="#ack迟到" class="headerlink" title="ack迟到"></a>ack迟到</h5><p>来晚的确认帧，丢弃</p>
+<h4 id="等值等待协议的信道利用率"><a href="#等值等待协议的信道利用率" class="headerlink" title="等值等待协议的信道利用率"></a>等值等待协议的信道利用率</h4><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113011364.png" class="">
+
+
+
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113239869.png" class="">
+
+
+
+<p>信道吞吐率=信道利用率*发送方的发送速率</p>
+<h3 id="GBN协议"><a href="#GBN协议" class="headerlink" title="GBN协议"></a>GBN协议</h3><p>停止等待协议的升级版，滑动窗口</p>
+<h4 id="发送方响应事件"><a href="#发送方响应事件" class="headerlink" title="发送方响应事件"></a>发送方响应事件</h4><ol>
+<li>上层调用</li>
+<li>收到ACK</li>
+</ol>
+<p>累计确认，收到确认帧后 滑动窗口</p>
+<ol start="3">
+<li>超时回退</li>
+</ol>
+<p>重传一组未收到确认的数据</p>
+<h4 id="接收方响应事件"><a href="#接收方响应事件" class="headerlink" title="接收方响应事件"></a>接收方响应事件</h4><ol>
+<li>ack确认，交数据给上层</li>
+<li>收到未按序的帧，丢弃，ack上次按序的帧序号</li>
+</ol>
+<h4 id="滑动窗口长度"><a href="#滑动窗口长度" class="headerlink" title="滑动窗口长度"></a>滑动窗口长度</h4><p>n是用于编号的比特数，这是发送方，接收方窗口始终是1<br>$$<br>1 \leq W_T \leq 2^n -1<br>$$</p>
+<h3 id="SR协议"><a href="#SR协议" class="headerlink" title="SR协议"></a>SR协议</h3><h4 id="发送方响应事件-1"><a href="#发送方响应事件-1" class="headerlink" title="发送方响应事件"></a>发送方响应事件</h4><ol>
+<li><p>上层调用</p>
+</li>
+<li><p>收到ack</p>
+</li>
+</ol>
+<p>缓存较大ack确认，当较小ack确认收到后，连续移动</p>
+<ol start="3">
+<li>超时，只传一个帧，每个帧都有超时计时器</li>
+</ol>
+<h4 id="接收方响应事件-1"><a href="#接收方响应事件-1" class="headerlink" title="接收方响应事件"></a>接收方响应事件</h4><ol>
+<li>失序的帧将会缓存，收谁确认谁</li>
+<li>收到小于窗口下界的重复帧将会，再发一个ack</li>
+</ol>
+<h4 id="滑动窗口长度-1"><a href="#滑动窗口长度-1" class="headerlink" title="滑动窗口长度"></a>滑动窗口长度</h4><p>n为作为编号的比特数</p>
+<p>WTmax==W<sub>Rmax</sub>==2<sup>(n-1) </sup></p>
+<h2 id="信道划分介质访问控制"><a href="#信道划分介质访问控制" class="headerlink" title="信道划分介质访问控制"></a>信道划分介质访问控制</h2><p>Medium Access Control</p>
+<p>点对点式</p>
+<p>广播式</p>
+<p>总线型、星型（逻辑总线型）</p>
+<h3 id="静态划分信道"><a href="#静态划分信道" class="headerlink" title="静态划分信道"></a>静态划分信道</h3><h4 id="信道划分介质访问控制-1"><a href="#信道划分介质访问控制-1" class="headerlink" title="信道划分介质访问控制"></a>信道划分介质访问控制</h4><p>多路复用技术，共享信道资源，把广播信道转变为点对点信道</p>
+<h5 id="频分多路复用-FDM"><a href="#频分多路复用-FDM" class="headerlink" title="频分多路复用 FDM"></a>频分多路复用 FDM</h5><p>同样时间，不同带宽</p>
+<p>效率高，实现容易</p>
+<h5 id="时分多路复用-TDM"><a href="#时分多路复用-TDM" class="headerlink" title="时分多路复用 TDM"></a>时分多路复用 TDM</h5><p>时间划为时分复用帧，TDM帧</p>
+<p>用户轮流占用信道，占用TDM帧固定序号的时隙</p>
+<p>统计时分复用 STDM</p>
+<p>集中器、达到发送值限，就发送</p>
+<h5 id="波分多路复用-WDM"><a href="#波分多路复用-WDM" class="headerlink" title="波分多路复用 WDM"></a>波分多路复用 WDM</h5><p>光的频谱</p>
+<h5 id="码分多路复用-CDM"><a href="#码分多路复用-CDM" class="headerlink" title="码分多路复用 CDM"></a>码分多路复用 CDM</h5><p>码分多址CDMA，码分复用的一种方式</p>
+<h3 id="动态划分信道"><a href="#动态划分信道" class="headerlink" title="动态划分信道"></a>动态划分信道</h3><h4 id="轮询访问介质访问控制"><a href="#轮询访问介质访问控制" class="headerlink" title="轮询访问介质访问控制"></a>轮询访问介质访问控制</h4><p>令牌传递协议</p>
+<h4 id="随机访问介质访问控制"><a href="#随机访问介质访问控制" class="headerlink" title="随机访问介质访问控制"></a>随机访问介质访问控制</h4><h5 id="ALOHA协议"><a href="#ALOHA协议" class="headerlink" title="ALOHA协议"></a>ALOHA协议</h5><h5 id="CSMA协议"><a href="#CSMA协议" class="headerlink" title="CSMA协议"></a>CSMA协议</h5><h5 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h5><h5 id="CSMA-CA协议"><a href="#CSMA-CA协议" class="headerlink" title="CSMA/CA协议"></a>CSMA/CA协议</h5><h2 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h2><p>以太网</p>
+<p>100Base-T</p>
+<p>通信适配器，网络接口卡，网卡</p>
+<p>网卡上的48位MAC地址，半I3E半厂</p>
+<p>高速以太网 100mb/s以上</p>
+<p>MAC帧：不同的数据链路层协议对应着不同的帧，所以，帧有多种，比如PPP帧、MAC帧等</p>
+<h2 id="广域网"><a href="#广域网" class="headerlink" title="广域网"></a>广域网</h2><p>PPP协议</p>
+<p>HDLC协议</p>
+<p>链路层扩展以太网</p>
+<p>网桥，转发，丢弃，分割冲突域，</p>
+<p>以太网交换机</p>
+<p>独占媒体带宽</p>
+<h2 id="功能概述-1"><a href="#功能概述-1" class="headerlink" title="功能概述"></a>功能概述</h2><p>路由选择，分组转发</p>
+<p>异构网络互联</p>
+<p>拥塞控制<br>开环控制<br>闭环控制</p>
+<h2 id="数据交换方式"><a href="#数据交换方式" class="headerlink" title="数据交换方式"></a>数据交换方式</h2><p>数据报</p>
+<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>电话网络</p>
+<h3 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h3><h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><h3 id="虚电路"><a href="#虚电路" class="headerlink" title="虚电路"></a>虚电路</h3><p>2的九次方 1 0000 0000 == 512</p>
+<p>8位二进制包含，0-255，共256个数字</p>
+<p>2的八次方-1 255 111,1111</p>
+<p>2的七次方-1 127 111,1111</p>
+<p>三类IP地址</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102212958453.png" class="">
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"><i class="fa fa-tag"></i> 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/" rel="prev" title="通用管理器">
+      <i class="fa fa-chevron-left"></i> 通用管理器
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络复习-七层概览"><span class="nav-number">1.</span> <span class="nav-text">计算机网络复习-七层概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#七层OSI参考模型"><span class="nav-number">1.1.</span> <span class="nav-text">七层OSI参考模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用层"><span class="nav-number">1.1.1.</span> <span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示层"><span class="nav-number">1.1.2.</span> <span class="nav-text">表示层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话层"><span class="nav-number">1.1.3.</span> <span class="nav-text">会话层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传输层"><span class="nav-number">1.1.4.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#流量控制"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">流量控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络层"><span class="nav-number">1.1.5.</span> <span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据链路层"><span class="nav-number">1.1.6.</span> <span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理层"><span class="nav-number">1.1.7.</span> <span class="nav-text">物理层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP协议栈"><span class="nav-number">1.2.</span> <span class="nav-text">TCP&#x2F;IP协议栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP与OSI"><span class="nav-number">1.2.1.</span> <span class="nav-text">TCP&#x2F;IP与OSI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相同点"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同点"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">不同点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向连接与无连接"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">面向连接与无连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据封装"><span class="nav-number">1.3.</span> <span class="nav-text">数据封装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物理层-1"><span class="nav-number">2.</span> <span class="nav-text">物理层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层特性"><span class="nav-number">2.1.</span> <span class="nav-text">物理层特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#机械特性"><span class="nav-number">2.1.1.</span> <span class="nav-text">机械特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电气特性"><span class="nav-number">2.1.2.</span> <span class="nav-text">电气特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能特性"><span class="nav-number">2.1.3.</span> <span class="nav-text">功能特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规程特性"><span class="nav-number">2.1.4.</span> <span class="nav-text">规程特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据通信"><span class="nav-number">2.2.</span> <span class="nav-text">数据通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#码元"><span class="nav-number">2.2.1.</span> <span class="nav-text">码元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#速率"><span class="nav-number">2.2.2.</span> <span class="nav-text">速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#码元传输速率"><span class="nav-number">2.2.3.</span> <span class="nav-text">码元传输速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息传输速率"><span class="nav-number">2.2.4.</span> <span class="nav-text">信息传输速率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奈氏准则与香农定理"><span class="nav-number">2.3.</span> <span class="nav-text">奈氏准则与香农定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#失真的影响因素"><span class="nav-number">2.3.1.</span> <span class="nav-text">失真的影响因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信道带宽"><span class="nav-number">2.3.2.</span> <span class="nav-text">信道带宽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#码间串扰"><span class="nav-number">2.3.3.</span> <span class="nav-text">码间串扰</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奈氏准则"><span class="nav-number">2.4.</span> <span class="nav-text">奈氏准则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件：理想低通"><span class="nav-number">2.4.1.</span> <span class="nav-text">条件：理想低通</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极限码元传输速率"><span class="nav-number">2.4.2.</span> <span class="nav-text">极限码元传输速率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#香农定理"><span class="nav-number">2.5.</span> <span class="nav-text">香农定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件：有噪声，带宽受限"><span class="nav-number">2.5.1.</span> <span class="nav-text">条件：有噪声，带宽受限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信道的极限传输速率"><span class="nav-number">2.5.2.</span> <span class="nav-text">信道的极限传输速率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基带传输与宽带传输"><span class="nav-number">2.6.</span> <span class="nav-text">基带传输与宽带传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编码与调制"><span class="nav-number">2.6.1.</span> <span class="nav-text">编码与调制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码方式"><span class="nav-number">2.6.2.</span> <span class="nav-text">编码方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调制方式"><span class="nav-number">2.6.3.</span> <span class="nav-text">调制方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCM脉码调制"><span class="nav-number">2.6.4.</span> <span class="nav-text">PCM脉码调制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽样"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">抽样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#量化"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">量化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编码"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">编码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟数据调制成模拟信号"><span class="nav-number">2.6.5.</span> <span class="nav-text">模拟数据调制成模拟信号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输介质-媒体-一"><span class="nav-number">2.7.</span> <span class="nav-text">传输介质&#x2F;媒体[一]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#光纤"><span class="nav-number">2.7.1.</span> <span class="nav-text">光纤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单模光纤"><span class="nav-number">2.7.1.1.</span> <span class="nav-text">单模光纤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多模光纤"><span class="nav-number">2.7.1.2.</span> <span class="nav-text">多模光纤</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输介质-媒体-二"><span class="nav-number">2.8.</span> <span class="nav-text">传输介质&#x2F;媒体[二]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无线电波"><span class="nav-number">2.8.1.</span> <span class="nav-text">无线电波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微波"><span class="nav-number">2.8.2.</span> <span class="nav-text">微波</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地面微波接力通信"><span class="nav-number">2.8.3.</span> <span class="nav-text">地面微波接力通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卫星通信"><span class="nav-number">2.8.3.1.</span> <span class="nav-text">卫星通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#红外线、激光"><span class="nav-number">2.8.3.2.</span> <span class="nav-text">红外线、激光</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层设备"><span class="nav-number">2.9.</span> <span class="nav-text">物理层设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中继器"><span class="nav-number">2.9.1.</span> <span class="nav-text">中继器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-3规则"><span class="nav-number">2.9.1.1.</span> <span class="nav-text">5-4-3规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集线器"><span class="nav-number">2.9.1.2.</span> <span class="nav-text">集线器</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据链路层-1"><span class="nav-number">3.</span> <span class="nav-text">数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#功能概述"><span class="nav-number">3.1.1.</span> <span class="nav-text">功能概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装成帧"><span class="nav-number">3.1.2.</span> <span class="nav-text">封装成帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差错控制"><span class="nav-number">3.1.3.</span> <span class="nav-text">差错控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#位错-比特错"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">位错&#x2F;比特错</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#检错编码"><span class="nav-number">3.1.3.1.1.</span> <span class="nav-text">检错编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#纠错编码"><span class="nav-number">3.1.3.1.2.</span> <span class="nav-text">纠错编码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#帧错"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">帧错</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流量控制-1"><span class="nav-number">3.2.</span> <span class="nav-text">流量控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#停止等待协议"><span class="nav-number">3.2.1.</span> <span class="nav-text">停止等待协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滑动窗口协议"><span class="nav-number">3.2.2.</span> <span class="nav-text">滑动窗口协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#停止等待协议的细节"><span class="nav-number">3.2.3.</span> <span class="nav-text">停止等待协议的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#无差错情况"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">无差错情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有差错情况"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">有差错情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#发送帧丢失"><span class="nav-number">3.2.3.2.1.</span> <span class="nav-text">发送帧丢失</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ack丢失"><span class="nav-number">3.2.3.2.2.</span> <span class="nav-text">ack丢失</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ack迟到"><span class="nav-number">3.2.3.2.3.</span> <span class="nav-text">ack迟到</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#等值等待协议的信道利用率"><span class="nav-number">3.2.3.3.</span> <span class="nav-text">等值等待协议的信道利用率</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GBN协议"><span class="nav-number">3.2.4.</span> <span class="nav-text">GBN协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送方响应事件"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">发送方响应事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接收方响应事件"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">接收方响应事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口长度"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">滑动窗口长度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR协议"><span class="nav-number">3.2.5.</span> <span class="nav-text">SR协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发送方响应事件-1"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">发送方响应事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接收方响应事件-1"><span class="nav-number">3.2.5.2.</span> <span class="nav-text">接收方响应事件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口长度-1"><span class="nav-number">3.2.5.3.</span> <span class="nav-text">滑动窗口长度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信道划分介质访问控制"><span class="nav-number">3.3.</span> <span class="nav-text">信道划分介质访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态划分信道"><span class="nav-number">3.3.1.</span> <span class="nav-text">静态划分信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信道划分介质访问控制-1"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">信道划分介质访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#频分多路复用-FDM"><span class="nav-number">3.3.1.1.1.</span> <span class="nav-text">频分多路复用 FDM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#时分多路复用-TDM"><span class="nav-number">3.3.1.1.2.</span> <span class="nav-text">时分多路复用 TDM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#波分多路复用-WDM"><span class="nav-number">3.3.1.1.3.</span> <span class="nav-text">波分多路复用 WDM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#码分多路复用-CDM"><span class="nav-number">3.3.1.1.4.</span> <span class="nav-text">码分多路复用 CDM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态划分信道"><span class="nav-number">3.3.2.</span> <span class="nav-text">动态划分信道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#轮询访问介质访问控制"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">轮询访问介质访问控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机访问介质访问控制"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">随机访问介质访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ALOHA协议"><span class="nav-number">3.3.2.2.1.</span> <span class="nav-text">ALOHA协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSMA协议"><span class="nav-number">3.3.2.2.2.</span> <span class="nav-text">CSMA协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSMA-CD协议"><span class="nav-number">3.3.2.2.3.</span> <span class="nav-text">CSMA&#x2F;CD协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CSMA-CA协议"><span class="nav-number">3.3.2.2.4.</span> <span class="nav-text">CSMA&#x2F;CA协议</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局域网"><span class="nav-number">3.4.</span> <span class="nav-text">局域网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广域网"><span class="nav-number">3.5.</span> <span class="nav-text">广域网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能概述-1"><span class="nav-number">3.6.</span> <span class="nav-text">功能概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据交换方式"><span class="nav-number">3.7.</span> <span class="nav-text">数据交换方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#电路交换"><span class="nav-number">3.7.1.</span> <span class="nav-text">电路交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报文交换"><span class="nav-number">3.7.2.</span> <span class="nav-text">报文交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组交换"><span class="nav-number">3.7.3.</span> <span class="nav-text">分组交换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚电路"><span class="nav-number">3.7.4.</span> <span class="nav-text">虚电路</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="汪世奇"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">汪世奇</p>
+  <div class="site-description" itemprop="description">阅读·思考·练习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kakapiya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kakapiya" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:w970934230@gmail.com" title="E-Mail → mailto:w970934230@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">汪世奇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"scrollpercent":true,"enable":true,"sidebar":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019-12-24 12:20:56前期准备初步计划 增删改查的按钮 表单的形式 一共五个页面，CRUD和index 用bootstrap做样式 用jquery做选择器  待学Jquery文档就绪事件12345678910111213&#x2F;&#x2F;1.小白版$(document).ready(function()&amp;#123;           &#x2F;&#x2F; 开始写 jQuery 代码...    &amp;#125;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通用管理器">
+<meta property="og:url" content="http://yoursite.com/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/index.html">
+<meta property="og:site_name" content="初出茅庐">
+<meta property="og:description" content="2019-12-24 12:20:56前期准备初步计划 增删改查的按钮 表单的形式 一共五个页面，CRUD和index 用bootstrap做样式 用jquery做选择器  待学Jquery文档就绪事件12345678910111213&#x2F;&#x2F;1.小白版$(document).ready(function()&amp;#123;           &#x2F;&#x2F; 开始写 jQuery 代码...    &amp;#125;)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-24T04:09:11.000Z">
+<meta property="article:modified_time" content="2020-04-01T11:32:11.918Z">
+<meta property="article:author" content="汪世奇">
+<meta property="article:tag" content="NodeJs">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>通用管理器 | 初出茅庐</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">初出茅庐</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如履薄冰</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-items">
+
+    <a href="/items" rel="section"><i class="fa fa-sitemap fa-fw"></i>项目</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通用管理器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-24 12:09:11" itemprop="dateCreated datePublished" datetime="2019-12-24T12:09:11+08:00">2019-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:32:11" itemprop="dateModified" datetime="2020-04-01T19:32:11+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2019-12-24-12-20-56"><a href="#2019-12-24-12-20-56" class="headerlink" title="2019-12-24 12:20:56"></a>2019-12-24 12:20:56</h1><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="初步计划"><a href="#初步计划" class="headerlink" title="初步计划"></a>初步计划</h3><ol>
+<li>增删改查的按钮</li>
+<li>表单的形式</li>
+<li>一共五个页面，CRUD和index</li>
+<li>用bootstrap做样式</li>
+<li>用jquery做选择器</li>
+</ol>
+<h3 id="待学"><a href="#待学" class="headerlink" title="待学"></a>待学</h3><h4 id="Jquery"><a href="#Jquery" class="headerlink" title="Jquery"></a>Jquery</h4><h5 id="文档就绪事件"><a href="#文档就绪事件" class="headerlink" title="文档就绪事件"></a>文档就绪事件</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.小白版</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 开始写 jQuery 代码...</span></span><br><span class="line">    </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.简洁版</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 开始写 jQuery 代码...</span></span><br><span class="line"> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>防止文档在完全加载（就绪）之前运行 jQuery 代码：</p>
+<ul>
+<li><p>试图隐藏一个不存在的元素</p>
+</li>
+<li><p>获得未完全加载的图像的大小</p>
+</li>
+</ul>
+<h4 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h4><h5 id="预编译版本"><a href="#预编译版本" class="headerlink" title="预编译版本"></a>预编译版本</h5><ol>
+<li>预编译/预编译器</li>
+</ol>
+<p>预编译就是预处理，是为编译做准备工作的阶段。预处理器在此阶段对一些代码进行预处理。</p>
+<p>预处理的内容包括：处理头文件包含( #include )、宏定义( #define )、条件编译( #if #else #ifdef #ifndef #elif #endif)，去掉注释。</p>
+<ol start="2">
+<li>CSS预编译语言</li>
+</ol>
+<p>Less.css是一种动态样式语言，属于CSS预处理语言的一种，它使用类似CSS的语法，为CSS的赋予了动态语言的特性，如<strong>变量</strong>、<strong>继承</strong>、<strong>运算</strong>、<strong>函数</strong>等，更方便CSS的编写和维护</p>
+<ol start="3">
+<li>LESS或者Sass相关编译器 </li>
+</ol>
+<p>Koaloa编译：国人开发的LESS/SASS编译工具。</p>
+<ol start="4">
+<li>预编译版本</li>
+</ol>
+<p>预编译文件可以直接使用到任何 web 项目中，此时的预编译指的是对bootstrap的css等文件的编译过后的版本，对于项目来说，预处理过程的一部分就包含将这些less.css文件编译。</p>
+<h5 id="一个无比愚蠢的错误"><a href="#一个无比愚蠢的错误" class="headerlink" title="一个无比愚蠢的错误"></a>一个无比愚蠢的错误</h5><p>link引入和script引入：</p>
+<p>这是一个典型的因为代码写的太少的问题，link是引入css文件，script则是引入js文件。。。</p>
+<p>居然被这个问题卡住了。。。</p>
+<h1 id="2019-12-25-13-25-42"><a href="#2019-12-25-13-25-42" class="headerlink" title="2019-12-25 13:25:42"></a>2019-12-25 13:25:42</h1><h2 id="在写校车票系统"><a href="#在写校车票系统" class="headerlink" title="在写校车票系统"></a>在写校车票系统</h2><h3 id="url的新接口"><a href="#url的新接口" class="headerlink" title="url的新接口"></a>url的新接口</h3><h4 id="new-URL-input-base"><a href="#new-URL-input-base" class="headerlink" title="new URL(input[, base])"></a>new URL(input[, base])</h4><ul>
+<li><p>或相对的 URL。如果 <code>input</code> 是相对路径，则需要 <code>base</code>。 如果 <code>input</code> 是绝对路径，则忽略 <code>base</code>。</p>
+</li>
+<li><p>[base] 如果 <code>input</code> 不是绝对路径，则为要解析的基本 URL。</p>
+</li>
+</ul>
+<h4 id="URLSearchParams-类"><a href="#URLSearchParams-类" class="headerlink" title="URLSearchParams 类"></a>URLSearchParams 类</h4><h5 id="常用方法-略-官方手册查询-URLSearchParams"><a href="#常用方法-略-官方手册查询-URLSearchParams" class="headerlink" title="常用方法(略)  官方手册查询-URLSearchParams"></a>常用方法(略)  <a href="http://nodejs.cn/api/url.html#url_class_urlsearchparams" target="_blank" rel="noopener">官方手册查询-URLSearchParams</a></h5><h5 id="转化字符串实例"><a href="#转化字符串实例" class="headerlink" title="转化字符串实例"></a>转化字符串实例</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params;</span><br><span class="line"></span><br><span class="line">params = <span class="keyword">new</span> URLSearchParams(<span class="string">'user=abc&amp;query=xyz'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(params.get(<span class="string">'user'</span>));</span><br><span class="line"><span class="comment">// 结果为 'abc'</span></span><br><span class="line"><span class="built_in">console</span>.log(params.toString());</span><br><span class="line"><span class="comment">// 结果为 'user=abc&amp;query=xyz'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//忽视'？',将字符串转化为URLSearchParams对象</span></span><br><span class="line">params = <span class="keyword">new</span> URLSearchParams(<span class="string">'?user=abc&amp;query=xyz'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(params.toString());</span><br><span class="line"><span class="comment">// 结果为 'user=abc&amp;query=xyz'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>不懂得管理代码，导致出现问题不知道怎么办，唯一想到的办法就是重写。</p>
+</li>
+<li><p>找资料的时间太多了，基本功太不扎实。</p>
+</li>
+</ol>
+<h1 id="2019-12-26-16-29-15"><a href="#2019-12-26-16-29-15" class="headerlink" title="2019-12-26 16:29:15"></a>2019-12-26 16:29:15</h1><h2 id="Object-null-prototype-问题"><a href="#Object-null-prototype-问题" class="headerlink" title="[Object: null prototype] 问题"></a>[Object: null prototype] 问题</h2><h3 id="关于prototype"><a href="#关于prototype" class="headerlink" title="关于prototype"></a>关于prototype</h3><p>函数的一种属性，本质就是函数的原型对象。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//给函数的属性prototype赋予一个方法get</span></span><br><span class="line">func.prototype.get=<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;<span class="comment">//很简单，你给我什么我就输出什么</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ob1 = <span class="keyword">new</span> func();</span><br><span class="line"><span class="comment">//用func实例化出来的对象来调用get函数</span></span><br><span class="line">alert(ob1.get(<span class="string">'hello,prototype原型对象'</span>));</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ob2 = <span class="keyword">new</span> func();</span><br><span class="line"><span class="comment">//用func实例化出来的对象来调用get方法</span></span><br><span class="line">alert(ob2.get(<span class="string">'我依然是func实例化出来的对象'</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="重要说明"><a href="#重要说明" class="headerlink" title="重要说明"></a>重要说明</h4><ol>
+<li>Array.prototype是一个数组</li>
+<li>String.prototype是一个字符串</li>
+<li>Object.prototype是一个对象</li>
+</ol>
+<p>参考博客：<a href="https://www.cnblogs.com/loveyoume/p/6112044.html" target="_blank" rel="noopener">简单理解js的prototype属性</a></p>
+<h2 id="ajax状态码"><a href="#ajax状态码" class="headerlink" title="ajax状态码"></a>ajax状态码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(xhr.readyState);</span><br><span class="line">  </span><br><span class="line">	xhr.open(<span class="string">'get'</span>,<span class="string">'./1.php'</span>);</span><br><span class="line">    xhr.send();<span class="comment">//执行时状态码开始从1到2，三次握手结束才变为2</span></span><br><span class="line">    	 </span><br><span class="line">         <span class="comment">//状态码改变过程</span></span><br><span class="line">        <span class="comment">//new ajax对象，变成1</span></span><br><span class="line">       <span class="comment">//三次握手结束，建立连接，变成2</span></span><br><span class="line">      <span class="comment">//开始传输数据，变成3</span></span><br><span class="line">     <span class="comment">//数据全部传输完，变成4</span></span><br><span class="line">        </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'aaa'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ccc'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.php</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    &lt;?php</span></span><br><span class="line"><span class="comment">    sleep(3);</span></span><br><span class="line"><span class="comment">    echo 1;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>在早上的时候把git用上了，这下应该不会出现昨晚的沙雕情况了。</p>
+</li>
+<li><p>写个通用管理系统还挺有意思的，就是自己太菜了。</p>
+</li>
+</ol>
+<h1 id="2019-12-27-12-54-21"><a href="#2019-12-27-12-54-21" class="headerlink" title="2019-12-27 12:54:21"></a>2019-12-27 12:54:21</h1><h2 id="express重构"><a href="#express重构" class="headerlink" title="express重构"></a>express重构</h2><p>1.启动服务器</p>
+<p>2.设置各种请求方式的路由</p>
+<p>3.导入外置路由</p>
+<h1 id="2019-12-30-18-29-39"><a href="#2019-12-30-18-29-39" class="headerlink" title="2019-12-30 18:29:39"></a>2019-12-30 18:29:39</h1><p>完成了页面以及数据的渲染，完成修改接口。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/NodeJs/" rel="tag"><i class="fa fa-tag"></i> NodeJs</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" rel="prev" title="前端工程师网络基础">
+      <i class="fa fa-chevron-left"></i> 前端工程师网络基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" rel="next" title="计算机网络基础">
+      计算机网络基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-24-12-20-56"><span class="nav-number">1.</span> <span class="nav-text">2019-12-24 12:20:56</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">前期准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初步计划"><span class="nav-number">1.1.1.</span> <span class="nav-text">初步计划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#待学"><span class="nav-number">1.1.2.</span> <span class="nav-text">待学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jquery"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Jquery</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文档就绪事件"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">文档就绪事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bootstrap"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">bootstrap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#预编译版本"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">预编译版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个无比愚蠢的错误"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">一个无比愚蠢的错误</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-25-13-25-42"><span class="nav-number">2.</span> <span class="nav-text">2019-12-25 13:25:42</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在写校车票系统"><span class="nav-number">2.1.</span> <span class="nav-text">在写校车票系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#url的新接口"><span class="nav-number">2.1.1.</span> <span class="nav-text">url的新接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#new-URL-input-base"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">new URL(input[, base])</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URLSearchParams-类"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">URLSearchParams 类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常用方法-略-官方手册查询-URLSearchParams"><span class="nav-number">2.1.1.2.1.</span> <span class="nav-text">常用方法(略)  官方手册查询-URLSearchParams</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转化字符串实例"><span class="nav-number">2.1.1.2.2.</span> <span class="nav-text">转化字符串实例</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.2.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-26-16-29-15"><span class="nav-number">3.</span> <span class="nav-text">2019-12-26 16:29:15</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-null-prototype-问题"><span class="nav-number">3.1.</span> <span class="nav-text">[Object: null prototype] 问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于prototype"><span class="nav-number">3.1.1.</span> <span class="nav-text">关于prototype</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重要说明"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">重要说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax状态码"><span class="nav-number">3.2.</span> <span class="nav-text">ajax状态码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-27-12-54-21"><span class="nav-number">4.</span> <span class="nav-text">2019-12-27 12:54:21</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#express重构"><span class="nav-number">4.1.</span> <span class="nav-text">express重构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2019-12-30-18-29-39"><span class="nav-number">5.</span> <span class="nav-text">2019-12-30 18:29:39</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="汪世奇"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">汪世奇</p>
+  <div class="site-description" itemprop="description">阅读·思考·练习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kakapiya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kakapiya" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:w970934230@gmail.com" title="E-Mail → mailto:w970934230@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">汪世奇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

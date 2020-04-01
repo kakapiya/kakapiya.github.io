@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/logo.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/logo.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/logo.png">
-  <link rel="mask-icon" href="/uploads/logo.png" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -125,17 +127,22 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">3</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-items">
+
+    <a href="/items" rel="section"><i class="fa fa-sitemap fa-fw"></i>项目</a>
 
   </li>
   </ul>
@@ -165,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/01/%E5%88%9D%E6%8E%A2Express/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/logo.png">
@@ -179,7 +186,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/01/%E5%88%9D%E6%8E%A2Express/" class="post-title-link" itemprop="url">初探Express</a>
+            <a href="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">计算机网络基础</a>
         </h2>
 
         <div class="post-meta">
@@ -188,9 +195,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-04-01 15:41:23 / 修改时间：15:48:46" itemprop="dateCreated datePublished" datetime="2020-04-01T15:41:23+08:00">2020-04-01</time>
+              <time title="创建时间：2019-12-30 20:35:24" itemprop="dateCreated datePublished" datetime="2019-12-30T20:35:24+08:00">2019-12-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:28:09" itemprop="dateModified" datetime="2020-04-01T19:28:09+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
             </span>
 
           
@@ -204,27 +226,542 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h1><h2 id="框架的价值"><a href="#框架的价值" class="headerlink" title="框架的价值"></a>框架的价值</h2><p>工厂化操作，中间件加工</p>
-<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>额外组成部分，简化工厂流水线。</p>
-<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><h2 id="写入cookie"><a href="#写入cookie" class="headerlink" title="写入cookie"></a>写入cookie</h2><p>要求：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//http.js</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line">app.use(cookieParser());</span><br><span class="line"></span><br><span class="line"><span class="comment">//route.js</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//script.js不需要引入中间件</span></span><br></pre></td></tr></table></figure>
-
-<p>route.js中需要引入中间件，http.js中需要使用中间件，这是外置路由导致的原因。</p>
-<p>方式：</p>
-<ol>
-<li><p><code>res.cookie(&#39;name&#39;,&#39;wsq&#39;);</code></p>
+          <p>计算机网络的状态：计算机的互联、自治<br>位和字节：速率和存储容量的单位</p>
+<h1 id="计算机网络复习-七层概览"><a href="#计算机网络复习-七层概览" class="headerlink" title="计算机网络复习-七层概览"></a>计算机网络复习-七层概览</h1><ol>
+<li>4个时延</li>
+<li>时延带宽积</li>
+<li>RTT</li>
+<li>2个利用率</li>
+<li>吞吐量</li>
+</ol>
+<h2 id="七层OSI参考模型"><a href="#七层OSI参考模型" class="headerlink" title="七层OSI参考模型"></a>七层OSI参考模型</h2><p>口诀：物联网叔会使用</p>
+<p>物理层、数据链路层、网络层、传输层、会话层、表示层、应用层</p>
+<p>端到端和点到点：河流层(上四层)和河床层(下三层)</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><p>能使得用户产生流量的服务</p>
+<h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><ol>
+<li><p>数据格式变换</p>
 </li>
-<li><p>直接设置响应头</p>
+<li><p>数据加密解密</p>
+</li>
+<li><p>数据压缩和恢复</p>
 </li>
 </ol>
-<h2 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h2><p>req.cookies</p>
-<p>不要少了s！！！   </p>
-<p><code>console.log(req.cookies.id);</code></p>
-<h1 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">moment().format(<span class="string">'MMMM Do YYYY, h:mm:ss a'</span>); <span class="comment">// 十二月 29日 2019, 11:33:54 晚上</span></span><br><span class="line">moment().format(<span class="string">'dddd'</span>);                    <span class="comment">// 星期日</span></span><br><span class="line">moment().format(<span class="string">"MMM Do YY"</span>);               <span class="comment">// 12月 29日 19</span></span><br></pre></td></tr></table></figure>
+<h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><p>想表示层实体提供建立连接并有序传输数据。</p>
+<p>SYN建立同步 协议：ADSP ASP</p>
+<ol>
+<li>建立、管理、终止会话</li>
+<li>使用校验点</li>
+</ol>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>两个进程的通信，端到端的通讯</p>
+<p>口诀：可差留用 </p>
+<p>可靠传输、不可靠传输、差错控制、流量控制、复用分用</p>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>发送端和接收端的速度匹配</p>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>协议：IP、IPX、ICMP、IDMP、ARP、RARP、OSPF</p>
+<p>口诀：陆流错拥</p>
+<ol>
+<li><p>路由选择：最佳路径</p>
+</li>
+<li><p>流量控制</p>
+</li>
+<li><p>差错控制</p>
+</li>
+<li><p>拥塞控制：</p>
+</li>
+</ol>
+<p>把分组从源端传到目的端 </p>
+<p>数据报是分组的爸爸</p>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><p>协议：SDLC、HDLC、PPP、STP</p>
+<p>把网络成的数据报组装成帧</p>
+<ol>
+<li>成帧</li>
+<li>差错控制</li>
+<li>流量控制</li>
+<li>访问控制</li>
+</ol>
+<h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><p>协议：Rj45、802.3</p>
+<p>用物理媒体实现比特流的透明传输。</p>
+<ol>
+<li>定义接口特性</li>
+<li>定义传输模式【单工、半双、双工】</li>
+<li>定义传输速率</li>
+<li>比特同步</li>
+<li>比特编码</li>
+</ol>
+<h2 id="TCP-IP协议栈"><a href="#TCP-IP协议栈" class="headerlink" title="TCP/IP协议栈"></a>TCP/IP协议栈</h2><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230232306960.png" class="">
 
-<h3 id="TEMPLATE-ERR"><a href="#TEMPLATE-ERR" class="headerlink" title="TEMPLATE ERR"></a>TEMPLATE ERR</h3><h3 id="template-Cannot-read-property-‘xx’-of-undefined"><a href="#template-Cannot-read-property-‘xx’-of-undefined" class="headerlink" title="template Cannot read property ‘xx’ of undefined"></a>template Cannot read property ‘xx’ of undefined</h3><p> 多余的$符号</p>
-<p>最好的解决办法应该就是好好看看官方的语法规则，并且自己验证一下，应该很快就能发现自己这样的语法连一般加载都不行。</p>
-<p><img src="/%E5%88%9D%E6%8E%A2Express/%E7%88%86%E7%82%B8.png" alt="爆炸"></p>
+
+
+<h3 id="TCP-IP与OSI"><a href="#TCP-IP与OSI" class="headerlink" title="TCP/IP与OSI"></a>TCP/IP与OSI</h3><h4 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h4><ol>
+<li>分层</li>
+<li>独立协议栈</li>
+<li>异构网络的互联</li>
+</ol>
+<h4 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h4><ol>
+<li>OSI定义服务、协议、接口</li>
+<li>OSI先模型后协议</li>
+<li>TCP/IP将IP作为重要层次。</li>
+</ol>
+<h4 id="面向连接与无连接"><a href="#面向连接与无连接" class="headerlink" title="面向连接与无连接"></a>面向连接与无连接</h4><p>面向连接：</p>
+<ol>
+<li><p>建立连接</p>
+</li>
+<li><p>成功连接后，数据传输</p>
+</li>
+</ol>
+<p>无连接：直接传输数据</p>
+<h2 id="数据封装"><a href="#数据封装" class="headerlink" title="数据封装"></a>数据封装</h2><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191230233404805.png" class="">
+
+
+
+<h1 id="物理层-1"><a href="#物理层-1" class="headerlink" title="物理层"></a>物理层</h1><h2 id="物理层特性"><a href="#物理层特性" class="headerlink" title="物理层特性"></a>物理层特性</h2><h3 id="机械特性"><a href="#机械特性" class="headerlink" title="机械特性"></a>机械特性</h3><p>接口所用接线器的形状和尺寸，引线数目和排列、固定和锁定装置等。</p>
+<h3 id="电气特性"><a href="#电气特性" class="headerlink" title="电气特性"></a>电气特性</h3><p>指明在接口电缆的各条线上出现的电压的范围，什么电平代表1，什么电平代表0.</p>
+<h3 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h3><p>规定接口某一条引线上出现某一电平表示的含义。</p>
+<h3 id="规程特性"><a href="#规程特性" class="headerlink" title="规程特性"></a>规程特性</h3><p>规定接口上各种信号线以及各种电平出现的先后顺序，即那根信号线先动作。</p>
+<h2 id="数据通信"><a href="#数据通信" class="headerlink" title="数据通信"></a>数据通信</h2><p>串行传输</p>
+<p>速度慢、费用低、适合远距离</p>
+<p>并行传输</p>
+<p>速度快、费用高、适合近距离</p>
+<h3 id="码元"><a href="#码元" class="headerlink" title="码元"></a>码元</h3><p>固定时长的信号波形（数字脉冲）</p>
+<p>M进制码元，M种状态</p>
+<h3 id="速率"><a href="#速率" class="headerlink" title="速率"></a>速率</h3><p>波特Baud，一秒能传输码元的数量的单位</p>
+<h3 id="码元传输速率"><a href="#码元传输速率" class="headerlink" title="码元传输速率"></a>码元传输速率</h3><p> 一秒能传输码元的数量多少</p>
+<h3 id="信息传输速率"><a href="#信息传输速率" class="headerlink" title="信息传输速率"></a>信息传输速率</h3><p>波特*一码元的比特数的多少</p>
+<p>设X为进制数，Y为Baud数,Z为信息传输速率<br>$$<br>Z=YBaud*log_2X<br>$$</p>
+<h2 id="奈氏准则与香农定理"><a href="#奈氏准则与香农定理" class="headerlink" title="奈氏准则与香农定理"></a>奈氏准则与香农定理</h2><p>这两个公式的带宽单位：Hz；常用带宽单位：bit/s</p>
+<p>内忧奈氏，外患香农</p>
+<h3 id="失真的影响因素"><a href="#失真的影响因素" class="headerlink" title="失真的影响因素"></a>失真的影响因素</h3><ol>
+<li>码元传输速率</li>
+<li>信号传输速率</li>
+<li>噪声干扰</li>
+<li>传输媒体质量</li>
+</ol>
+<h3 id="信道带宽"><a href="#信道带宽" class="headerlink" title="信道带宽"></a>信道带宽</h3><p>信道能通过的最高频率和最低频率之差</p>
+<h3 id="码间串扰"><a href="#码间串扰" class="headerlink" title="码间串扰"></a>码间串扰</h3><p>码元之间界限不清晰</p>
+<h2 id="奈氏准则"><a href="#奈氏准则" class="headerlink" title="奈氏准则"></a>奈氏准则</h2><h3 id="条件：理想低通"><a href="#条件：理想低通" class="headerlink" title="条件：理想低通"></a>条件：理想低通</h3><p>理想：无噪声</p>
+<p>低通：带宽受限，规则为低频信号能正常通过,而超过设定临界值的高频信号则被阻隔、减弱。</p>
+<h3 id="极限码元传输速率"><a href="#极限码元传输速率" class="headerlink" title="极限码元传输速率"></a>极限码元传输速率</h3><p>避免码间串扰的速率：2W Baud<br>$$<br>极限码元传输速率=2W (Baud)<br>$$<br>W为信道带宽，限制码元传输速率</p>
+<p>V为几种码元/码元的离散电平数目<br>$$<br>理想低通信道下的极限数据传输率=2Wlog_2V (b/s)<br>$$<br>信号变化能力：相位*振幅</p>
+<h2 id="香农定理"><a href="#香农定理" class="headerlink" title="香农定理"></a>香农定理</h2><p>限制信息的传输速率，限制比特率（每秒传送的bit数）</p>
+<p>信噪比：信号的平均功率/噪声的平均功率常记为S/N，dB为度量单位。<br>$$<br>信噪比(dB)=10log_10(S/N)<br>$$</p>
+<h3 id="条件：有噪声，带宽受限"><a href="#条件：有噪声，带宽受限" class="headerlink" title="条件：有噪声，带宽受限"></a>条件：有噪声，带宽受限</h3><h3 id="信道的极限传输速率"><a href="#信道的极限传输速率" class="headerlink" title="信道的极限传输速率"></a>信道的极限传输速率</h3><p>$$<br>信道的极限传输速率=Wlog_2(1+S/N)(b/s)<br>$$</p>
+<p>香农定理和奈氏准则都是一个极限值计算公式，有信噪比的时候仍需要计利用奈氏准则解决内忧问题，选择一个主要矛盾，取两极限值中的最小值。</p>
+<h2 id="基带传输与宽带传输"><a href="#基带传输与宽带传输" class="headerlink" title="基带传输与宽带传输"></a>基带传输与宽带传输</h2><p>基带传输</p>
+<p>在数字信道传输，来自信源的信号，近距离，衰减小</p>
+<p>宽带传输</p>
+<p>在模拟信道传输胡，基带信号经过载波调制后，频率范围移至较高频段，远距离，衰减大</p>
+<h3 id="编码与调制"><a href="#编码与调制" class="headerlink" title="编码与调制"></a>编码与调制</h3><p>数字数据经过数字发生器变成数字信号，编码</p>
+<p>数字数据经过调制器变成模拟信号，调制</p>
+<p>PCM编码器，模拟-数字</p>
+<p>放大器调制器，模拟-模拟</p>
+<h3 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h3><p>1、非归零</p>
+<p>2、归零</p>
+<p>3、反向不归零</p>
+<p>4、曼彻斯特编码（万字符）</p>
+<p>5、差分曼彻斯特编码（万字符 同1异0）</p>
+<p>6、4B/5B编码</p>
+<h3 id="调制方式"><a href="#调制方式" class="headerlink" title="调制方式"></a>调制方式</h3><p>调幅：有无</p>
+<p>调频：疏密</p>
+<p>调相：正弦、余弦</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231224606676.png" class="">
+
+<p>调频+调相（QAM）</p>
+<h3 id="PCM脉码调制"><a href="#PCM脉码调制" class="headerlink" title="PCM脉码调制"></a>PCM脉码调制</h3><p>抽样、量化、编码 </p>
+<h4 id="抽样"><a href="#抽样" class="headerlink" title="抽样"></a>抽样</h4><p>$$<br>f_(采样频率<em>)$\geq$2f</em>(信号最高频率_)<br>$$</p>
+<p>原理：</p>
+<p>模拟信号是由由正弦波叠加而成，想要采样到信号最高频率的信号，就需要两倍的采样频率才能采到，因为频率为周期的二分之一（从上到下就是一个频率，而一个周期还包括从下到上），想要采到完整的周期，就需要两倍频率，若非两倍，则区分不出低频部分。</p>
+<p>原因是高频声音和低频声音的正确叠加是保证音频质量的前提，但是低采样频率会使得区分不出高频，高频波段中间部分被忽视，降级为低频，失真。</p>
+<h4 id="量化"><a href="#量化" class="headerlink" title="量化"></a>量化</h4><p>电平幅值分级标度成数字值，将连续的电频幅值转化为离散的数字量</p>
+<h4 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h4><p>量化的结构转化为二进制编码</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20191231225657571.png" class="">
+
+
+
+<h3 id="模拟数据调制成模拟信号"><a href="#模拟数据调制成模拟信号" class="headerlink" title="模拟数据调制成模拟信号"></a>模拟数据调制成模拟信号</h3><p>改变频率，</p>
+<p>？载波信号</p>
+<h2 id="传输介质-媒体-一"><a href="#传输介质-媒体-一" class="headerlink" title="传输介质/媒体[一]"></a>传输介质/媒体[一]</h2><p>导向性/非导向性</p>
+<p>UTP:非屏蔽双绞线</p>
+<p>STP:屏蔽双绞线        </p>
+<h3 id="光纤"><a href="#光纤" class="headerlink" title="光纤"></a>光纤</h3><p>实心纤芯（高折射率）和包层（低折射率）</p>
+<h4 id="单模光纤"><a href="#单模光纤" class="headerlink" title="单模光纤"></a>单模光纤</h4><p>横向模式，定向性很好的激光二极管</p>
+<p>衰耗小，适合远距离</p>
+<h4 id="多模光纤"><a href="#多模光纤" class="headerlink" title="多模光纤"></a>多模光纤</h4><p>多种传播光信号模式的光纤，发光二极管</p>
+<p>易失真，适合近距离</p>
+<ol>
+<li>损耗小，中继距离长，远距离传输很经济</li>
+<li>抗雷电和电子干扰性能好</li>
+<li>无串音干扰，保密性好，不易窃听或截取数据</li>
+<li>体积小，重量轻</li>
+</ol>
+<h2 id="传输介质-媒体-二"><a href="#传输介质-媒体-二" class="headerlink" title="传输介质/媒体[二]"></a>传输介质/媒体[二]</h2><h3 id="无线电波"><a href="#无线电波" class="headerlink" title="无线电波"></a>无线电波</h3><p>方向：所有方向</p>
+<h3 id="微波"><a href="#微波" class="headerlink" title="微波"></a>微波</h3><p>方向：固定方向</p>
+<p>通信频率较高，频段范围宽，数据率很高</p>
+<p>数据率：数据传输速率（Data Transfer Rate），是指通信线上传输信息的速度，在单位时间内（通常为一秒）传输的比特数，又称比特率</p>
+<h3 id="地面微波接力通信"><a href="#地面微波接力通信" class="headerlink" title="地面微波接力通信"></a>地面微波接力通信</h3><p>中继站转发</p>
+<h4 id="卫星通信"><a href="#卫星通信" class="headerlink" title="卫星通信"></a>卫星通信</h4><p>地面微波通信的一种新应用，中继站到天上去了，即为同步卫星，一个同步卫星抵得上多个中继站。</p>
+<ol>
+<li><p>通信容量大</p>
+</li>
+<li><p>距离远</p>
+</li>
+<li><p>覆盖广</p>
+</li>
+<li><p>广播通信和多址通信</p>
+</li>
+<li><p>传播时延长</p>
+</li>
+<li><p>受气候影响大</p>
+</li>
+<li><p>误码率高</p>
+</li>
+<li><p>成本高</p>
+</li>
+</ol>
+<h4 id="红外线、激光"><a href="#红外线、激光" class="headerlink" title="红外线、激光"></a>红外线、激光</h4><p>方向：固定方向</p>
+<h2 id="物理层设备"><a href="#物理层设备" class="headerlink" title="物理层设备"></a>物理层设备</h2><h3 id="中继器"><a href="#中继器" class="headerlink" title="中继器"></a>中继器</h3><p>再生数字信号</p>
+<p>再生和还原,放大和整形</p>
+<h4 id="5-4-3规则"><a href="#5-4-3规则" class="headerlink" title="5-4-3规则"></a>5-4-3规则</h4><p>网络标准中都对信号延迟范围有具体的规定，所以中继器只能在规定的范围内工作，否则就会出现网络故障。</p>
+<p>10M以太网</p>
+<p>5个网段内</p>
+<p>4个物理层网络设备</p>
+<p>3个段可以挂工作站</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200101130459535.png" class="">
+
+
+
+<h4 id="集线器"><a href="#集线器" class="headerlink" title="集线器"></a>集线器</h4><ol>
+<li>多口中继器，对信号再生放大转发到其他所有工作中端口</li>
+<li>星型拓扑，广播</li>
+<li>大的冲突域，不能分割冲突域</li>
+<li>集线器上的设备平分带宽</li>
+</ol>
+<h1 id="数据链路层-1"><a href="#数据链路层-1" class="headerlink" title="数据链路层"></a>数据链路层</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>结点：主机、路由器</p>
+<p>链路：物理通道，有限链路，无线链路</p>
+<p>数据链路：逻辑通道，</p>
+<p>帧：协议数据单元</p>
+<h3 id="功能概述"><a href="#功能概述" class="headerlink" title="功能概述"></a>功能概述</h3><p>为网络层提供服务</p>
+<ol>
+<li><p>链路管理</p>
+</li>
+<li><p>组帧</p>
+</li>
+<li><p>流量控制</p>
+</li>
+<li><p>差错控制</p>
+</li>
+</ol>
+<h3 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h3><p>帧定界</p>
+<p>帧同步</p>
+<p>数据链路层的帧长</p>
+<p>最大传送单元MTU</p>
+<p>帧的数据部分</p>
+<ol>
+<li>字符计数法</li>
+</ol>
+<p>帧首部有计数字段</p>
+<ol start="2">
+<li>字符填充法</li>
+</ol>
+<p>SOH EOT</p>
+<ol start="3">
+<li>零比特填充法</li>
+</ol>
+<p>开始结束标志位一致</p>
+<p>5‘1’ 1‘0’</p>
+<ol start="4">
+<li>违规编码法</li>
+</ol>
+<p>用高高，低低做起止和终止</p>
+<h3 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h3><p>热噪声</p>
+<p>冲击噪声</p>
+<h4 id="位错-比特错"><a href="#位错-比特错" class="headerlink" title="位错/比特错"></a>位错/比特错</h4><p>冗余码：附加确认信息</p>
+<h5 id="检错编码"><a href="#检错编码" class="headerlink" title="检错编码"></a>检错编码</h5><ol>
+<li>奇偶校验码</li>
+</ol>
+<p>加一个1，为奇 数个1，奇校验</p>
+<ol start="2">
+<li>循环冗余码CRC</li>
+</ol>
+<p>FCS帧检验序列，即为余数</p>
+<p>最终发送的数据=要发送的数据+帧检验序列FCS</p>
+<p>发送数据添阶数个零，异或除多项式， 余数为FCS</p>
+<p>多项式*FCS=最终发送的数据</p>
+<p>无差错接收</p>
+<h5 id="纠错编码"><a href="#纠错编码" class="headerlink" title="纠错编码"></a>纠错编码</h5><p>海明码</p>
+<p>海明不等式<br>$$<br>2^r \geq K+r+1<br>$$</p>
+<p>r为冗余信息位，k为信息位， D为数据</p>
+<p>求校验码P</p>
+<ol>
+<li>先填校验码p，只能在2的阶乘数上，1···2···4···8···16···</li>
+<li>再按序填上D的值，并填上实际值，即为数据</li>
+<li>计算p1，数据位里，其二进制中第一位的有和校验码p1的第一位重合的，就是p1的可校验位</li>
+<li>令所有要检验的D异或【相同==0，相异==1】后==0，算出p1</li>
+<li>以此类推，将校验码p填入实际值</li>
+<li>填满后的实际值即为海明码</li>
+</ol>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102102951542.png" class="">
+
+
+
+<p>检错</p>
+<p>令所有校验的位异或运算</p>
+<p>得到的代码的实际值就是出错的位数</p>
+<h4 id="帧错"><a href="#帧错" class="headerlink" title="帧错"></a>帧错</h4><ol>
+<li><p>丢失</p>
+</li>
+<li><p>重复</p>
+</li>
+<li><p>失序</p>
+</li>
+</ol>
+<h2 id="流量控制-1"><a href="#流量控制-1" class="headerlink" title="流量控制"></a>流量控制</h2><h3 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h3><p>发送一个，等待收到确认，再发下一个</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102105913174.png" class="">
+
+
+
+<h3 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h3><p>收到一个确认，往前移动一格</p>
+<p>解决的问题：流量控制（窗口限制），可靠传输（重传机制）</p>
+<p>后退N帧协议 GBN</p>
+<p>选择重传协议 SR</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110022374.png" class="">
+
+
+
+<h3 id="停止等待协议的细节"><a href="#停止等待协议的细节" class="headerlink" title="停止等待协议的细节"></a>停止等待协议的细节</h3><h4 id="无差错情况"><a href="#无差错情况" class="headerlink" title="无差错情况"></a>无差错情况</h4><p>ack0 ack1反复，一次只发一个</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102110754092.png" class="">
+
+
+
+<h4 id="有差错情况"><a href="#有差错情况" class="headerlink" title="有差错情况"></a>有差错情况</h4><h5 id="发送帧丢失"><a href="#发送帧丢失" class="headerlink" title="发送帧丢失"></a>发送帧丢失</h5><p>超时计时器，超时重传，设置超时时间要大于RTT</p>
+<ol>
+<li><p>发一个帧之后要拷贝副本，确认收到后才丢弃</p>
+</li>
+<li><p>发送帧，确认帧需要编号，避免丢失，重复</p>
+</li>
+</ol>
+<h5 id="ack丢失"><a href="#ack丢失" class="headerlink" title="ack丢失"></a>ack丢失</h5><p>发送方超时重传后，确认方收到重复帧会直接丢弃</p>
+<h5 id="ack迟到"><a href="#ack迟到" class="headerlink" title="ack迟到"></a>ack迟到</h5><p>来晚的确认帧，丢弃</p>
+<h4 id="等值等待协议的信道利用率"><a href="#等值等待协议的信道利用率" class="headerlink" title="等值等待协议的信道利用率"></a>等值等待协议的信道利用率</h4><img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113011364.png" class="">
+
+
+
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102113239869.png" class="">
+
+
+
+<p>信道吞吐率=信道利用率*发送方的发送速率</p>
+<h3 id="GBN协议"><a href="#GBN协议" class="headerlink" title="GBN协议"></a>GBN协议</h3><p>停止等待协议的升级版，滑动窗口</p>
+<h4 id="发送方响应事件"><a href="#发送方响应事件" class="headerlink" title="发送方响应事件"></a>发送方响应事件</h4><ol>
+<li>上层调用</li>
+<li>收到ACK</li>
+</ol>
+<p>累计确认，收到确认帧后 滑动窗口</p>
+<ol start="3">
+<li>超时回退</li>
+</ol>
+<p>重传一组未收到确认的数据</p>
+<h4 id="接收方响应事件"><a href="#接收方响应事件" class="headerlink" title="接收方响应事件"></a>接收方响应事件</h4><ol>
+<li>ack确认，交数据给上层</li>
+<li>收到未按序的帧，丢弃，ack上次按序的帧序号</li>
+</ol>
+<h4 id="滑动窗口长度"><a href="#滑动窗口长度" class="headerlink" title="滑动窗口长度"></a>滑动窗口长度</h4><p>n是用于编号的比特数，这是发送方，接收方窗口始终是1<br>$$<br>1 \leq W_T \leq 2^n -1<br>$$</p>
+<h3 id="SR协议"><a href="#SR协议" class="headerlink" title="SR协议"></a>SR协议</h3><h4 id="发送方响应事件-1"><a href="#发送方响应事件-1" class="headerlink" title="发送方响应事件"></a>发送方响应事件</h4><ol>
+<li><p>上层调用</p>
+</li>
+<li><p>收到ack</p>
+</li>
+</ol>
+<p>缓存较大ack确认，当较小ack确认收到后，连续移动</p>
+<ol start="3">
+<li>超时，只传一个帧，每个帧都有超时计时器</li>
+</ol>
+<h4 id="接收方响应事件-1"><a href="#接收方响应事件-1" class="headerlink" title="接收方响应事件"></a>接收方响应事件</h4><ol>
+<li>失序的帧将会缓存，收谁确认谁</li>
+<li>收到小于窗口下界的重复帧将会，再发一个ack</li>
+</ol>
+<h4 id="滑动窗口长度-1"><a href="#滑动窗口长度-1" class="headerlink" title="滑动窗口长度"></a>滑动窗口长度</h4><p>n为作为编号的比特数</p>
+<p>WTmax==W<sub>Rmax</sub>==2<sup>(n-1) </sup></p>
+<h2 id="信道划分介质访问控制"><a href="#信道划分介质访问控制" class="headerlink" title="信道划分介质访问控制"></a>信道划分介质访问控制</h2><p>Medium Access Control</p>
+<p>点对点式</p>
+<p>广播式</p>
+<p>总线型、星型（逻辑总线型）</p>
+<h3 id="静态划分信道"><a href="#静态划分信道" class="headerlink" title="静态划分信道"></a>静态划分信道</h3><h4 id="信道划分介质访问控制-1"><a href="#信道划分介质访问控制-1" class="headerlink" title="信道划分介质访问控制"></a>信道划分介质访问控制</h4><p>多路复用技术，共享信道资源，把广播信道转变为点对点信道</p>
+<h5 id="频分多路复用-FDM"><a href="#频分多路复用-FDM" class="headerlink" title="频分多路复用 FDM"></a>频分多路复用 FDM</h5><p>同样时间，不同带宽</p>
+<p>效率高，实现容易</p>
+<h5 id="时分多路复用-TDM"><a href="#时分多路复用-TDM" class="headerlink" title="时分多路复用 TDM"></a>时分多路复用 TDM</h5><p>时间划为时分复用帧，TDM帧</p>
+<p>用户轮流占用信道，占用TDM帧固定序号的时隙</p>
+<p>统计时分复用 STDM</p>
+<p>集中器、达到发送值限，就发送</p>
+<h5 id="波分多路复用-WDM"><a href="#波分多路复用-WDM" class="headerlink" title="波分多路复用 WDM"></a>波分多路复用 WDM</h5><p>光的频谱</p>
+<h5 id="码分多路复用-CDM"><a href="#码分多路复用-CDM" class="headerlink" title="码分多路复用 CDM"></a>码分多路复用 CDM</h5><p>码分多址CDMA，码分复用的一种方式</p>
+<h3 id="动态划分信道"><a href="#动态划分信道" class="headerlink" title="动态划分信道"></a>动态划分信道</h3><h4 id="轮询访问介质访问控制"><a href="#轮询访问介质访问控制" class="headerlink" title="轮询访问介质访问控制"></a>轮询访问介质访问控制</h4><p>令牌传递协议</p>
+<h4 id="随机访问介质访问控制"><a href="#随机访问介质访问控制" class="headerlink" title="随机访问介质访问控制"></a>随机访问介质访问控制</h4><h5 id="ALOHA协议"><a href="#ALOHA协议" class="headerlink" title="ALOHA协议"></a>ALOHA协议</h5><h5 id="CSMA协议"><a href="#CSMA协议" class="headerlink" title="CSMA协议"></a>CSMA协议</h5><h5 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h5><h5 id="CSMA-CA协议"><a href="#CSMA-CA协议" class="headerlink" title="CSMA/CA协议"></a>CSMA/CA协议</h5><h2 id="局域网"><a href="#局域网" class="headerlink" title="局域网"></a>局域网</h2><p>以太网</p>
+<p>100Base-T</p>
+<p>通信适配器，网络接口卡，网卡</p>
+<p>网卡上的48位MAC地址，半I3E半厂</p>
+<p>高速以太网 100mb/s以上</p>
+<p>MAC帧：不同的数据链路层协议对应着不同的帧，所以，帧有多种，比如PPP帧、MAC帧等</p>
+<h2 id="广域网"><a href="#广域网" class="headerlink" title="广域网"></a>广域网</h2><p>PPP协议</p>
+<p>HDLC协议</p>
+<p>链路层扩展以太网</p>
+<p>网桥，转发，丢弃，分割冲突域，</p>
+<p>以太网交换机</p>
+<p>独占媒体带宽</p>
+<h2 id="功能概述-1"><a href="#功能概述-1" class="headerlink" title="功能概述"></a>功能概述</h2><p>路由选择，分组转发</p>
+<p>异构网络互联</p>
+<p>拥塞控制<br>开环控制<br>闭环控制</p>
+<h2 id="数据交换方式"><a href="#数据交换方式" class="headerlink" title="数据交换方式"></a>数据交换方式</h2><p>数据报</p>
+<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>电话网络</p>
+<h3 id="报文交换"><a href="#报文交换" class="headerlink" title="报文交换"></a>报文交换</h3><h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><h3 id="虚电路"><a href="#虚电路" class="headerlink" title="虚电路"></a>虚电路</h3><p>2的九次方 1 0000 0000 == 512</p>
+<p>8位二进制包含，0-255，共256个数字</p>
+<p>2的八次方-1 255 111,1111</p>
+<p>2的七次方-1 127 111,1111</p>
+<p>三类IP地址</p>
+<img src="/2019/12/30/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/image-20200102212958453.png" class="">
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/24/%E5%9F%BA%E4%BA%8ENodeJs%E7%9A%84%E9%80%9A%E7%94%A8%E7%AE%A1%E7%90%86%E5%99%A8/" class="post-title-link" itemprop="url">通用管理器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-24 12:09:11" itemprop="dateCreated datePublished" datetime="2019-12-24T12:09:11+08:00">2019-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:32:11" itemprop="dateModified" datetime="2020-04-01T19:32:11+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="2019-12-24-12-20-56"><a href="#2019-12-24-12-20-56" class="headerlink" title="2019-12-24 12:20:56"></a>2019-12-24 12:20:56</h1><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><h3 id="初步计划"><a href="#初步计划" class="headerlink" title="初步计划"></a>初步计划</h3><ol>
+<li>增删改查的按钮</li>
+<li>表单的形式</li>
+<li>一共五个页面，CRUD和index</li>
+<li>用bootstrap做样式</li>
+<li>用jquery做选择器</li>
+</ol>
+<h3 id="待学"><a href="#待学" class="headerlink" title="待学"></a>待学</h3><h4 id="Jquery"><a href="#Jquery" class="headerlink" title="Jquery"></a>Jquery</h4><h5 id="文档就绪事件"><a href="#文档就绪事件" class="headerlink" title="文档就绪事件"></a>文档就绪事件</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.小白版</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 开始写 jQuery 代码...</span></span><br><span class="line">    </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.简洁版</span></span><br><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> </span><br><span class="line">   <span class="comment">// 开始写 jQuery 代码...</span></span><br><span class="line"> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>防止文档在完全加载（就绪）之前运行 jQuery 代码：</p>
+<ul>
+<li><p>试图隐藏一个不存在的元素</p>
+</li>
+<li><p>获得未完全加载的图像的大小</p>
+</li>
+</ul>
+<h4 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h4><h5 id="预编译版本"><a href="#预编译版本" class="headerlink" title="预编译版本"></a>预编译版本</h5><ol>
+<li>预编译/预编译器</li>
+</ol>
+<p>预编译就是预处理，是为编译做准备工作的阶段。预处理器在此阶段对一些代码进行预处理。</p>
+<p>预处理的内容包括：处理头文件包含( #include )、宏定义( #define )、条件编译( #if #else #ifdef #ifndef #elif #endif)，去掉注释。</p>
+<ol start="2">
+<li>CSS预编译语言</li>
+</ol>
+<p>Less.css是一种动态样式语言，属于CSS预处理语言的一种，它使用类似CSS的语法，为CSS的赋予了动态语言的特性，如<strong>变量</strong>、<strong>继承</strong>、<strong>运算</strong>、<strong>函数</strong>等，更方便CSS的编写和维护</p>
+<ol start="3">
+<li>LESS或者Sass相关编译器 </li>
+</ol>
+<p>Koaloa编译：国人开发的LESS/SASS编译工具。</p>
+<ol start="4">
+<li>预编译版本</li>
+</ol>
+<p>预编译文件可以直接使用到任何 web 项目中，此时的预编译指的是对bootstrap的css等文件的编译过后的版本，对于项目来说，预处理过程的一部分就包含将这些less.css文件编译。</p>
+<h5 id="一个无比愚蠢的错误"><a href="#一个无比愚蠢的错误" class="headerlink" title="一个无比愚蠢的错误"></a>一个无比愚蠢的错误</h5><p>link引入和script引入：</p>
+<p>这是一个典型的因为代码写的太少的问题，link是引入css文件，script则是引入js文件。。。</p>
+<p>居然被这个问题卡住了。。。</p>
+<h1 id="2019-12-25-13-25-42"><a href="#2019-12-25-13-25-42" class="headerlink" title="2019-12-25 13:25:42"></a>2019-12-25 13:25:42</h1><h2 id="在写校车票系统"><a href="#在写校车票系统" class="headerlink" title="在写校车票系统"></a>在写校车票系统</h2><h3 id="url的新接口"><a href="#url的新接口" class="headerlink" title="url的新接口"></a>url的新接口</h3><h4 id="new-URL-input-base"><a href="#new-URL-input-base" class="headerlink" title="new URL(input[, base])"></a>new URL(input[, base])</h4><ul>
+<li><p>或相对的 URL。如果 <code>input</code> 是相对路径，则需要 <code>base</code>。 如果 <code>input</code> 是绝对路径，则忽略 <code>base</code>。</p>
+</li>
+<li><p>[base] 如果 <code>input</code> 不是绝对路径，则为要解析的基本 URL。</p>
+</li>
+</ul>
+<h4 id="URLSearchParams-类"><a href="#URLSearchParams-类" class="headerlink" title="URLSearchParams 类"></a>URLSearchParams 类</h4><h5 id="常用方法-略-官方手册查询-URLSearchParams"><a href="#常用方法-略-官方手册查询-URLSearchParams" class="headerlink" title="常用方法(略)  官方手册查询-URLSearchParams"></a>常用方法(略)  <a href="http://nodejs.cn/api/url.html#url_class_urlsearchparams" target="_blank" rel="noopener">官方手册查询-URLSearchParams</a></h5><h5 id="转化字符串实例"><a href="#转化字符串实例" class="headerlink" title="转化字符串实例"></a>转化字符串实例</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> params;</span><br><span class="line"></span><br><span class="line">params = <span class="keyword">new</span> URLSearchParams(<span class="string">'user=abc&amp;query=xyz'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(params.get(<span class="string">'user'</span>));</span><br><span class="line"><span class="comment">// 结果为 'abc'</span></span><br><span class="line"><span class="built_in">console</span>.log(params.toString());</span><br><span class="line"><span class="comment">// 结果为 'user=abc&amp;query=xyz'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//忽视'？',将字符串转化为URLSearchParams对象</span></span><br><span class="line">params = <span class="keyword">new</span> URLSearchParams(<span class="string">'?user=abc&amp;query=xyz'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(params.toString());</span><br><span class="line"><span class="comment">// 结果为 'user=abc&amp;query=xyz'</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>不懂得管理代码，导致出现问题不知道怎么办，唯一想到的办法就是重写。</p>
+</li>
+<li><p>找资料的时间太多了，基本功太不扎实。</p>
+</li>
+</ol>
+<h1 id="2019-12-26-16-29-15"><a href="#2019-12-26-16-29-15" class="headerlink" title="2019-12-26 16:29:15"></a>2019-12-26 16:29:15</h1><h2 id="Object-null-prototype-问题"><a href="#Object-null-prototype-问题" class="headerlink" title="[Object: null prototype] 问题"></a>[Object: null prototype] 问题</h2><h3 id="关于prototype"><a href="#关于prototype" class="headerlink" title="关于prototype"></a>关于prototype</h3><p>函数的一种属性，本质就是函数的原型对象。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//给函数的属性prototype赋予一个方法get</span></span><br><span class="line">func.prototype.get=<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value;<span class="comment">//很简单，你给我什么我就输出什么</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ob1 = <span class="keyword">new</span> func();</span><br><span class="line"><span class="comment">//用func实例化出来的对象来调用get函数</span></span><br><span class="line">alert(ob1.get(<span class="string">'hello,prototype原型对象'</span>));</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ob2 = <span class="keyword">new</span> func();</span><br><span class="line"><span class="comment">//用func实例化出来的对象来调用get方法</span></span><br><span class="line">alert(ob2.get(<span class="string">'我依然是func实例化出来的对象'</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="重要说明"><a href="#重要说明" class="headerlink" title="重要说明"></a>重要说明</h4><ol>
+<li>Array.prototype是一个数组</li>
+<li>String.prototype是一个字符串</li>
+<li>Object.prototype是一个对象</li>
+</ol>
+<p>参考博客：<a href="https://www.cnblogs.com/loveyoume/p/6112044.html" target="_blank" rel="noopener">简单理解js的prototype属性</a></p>
+<h2 id="ajax状态码"><a href="#ajax状态码" class="headerlink" title="ajax状态码"></a>ajax状态码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(xhr.readyState);</span><br><span class="line">  </span><br><span class="line">	xhr.open(<span class="string">'get'</span>,<span class="string">'./1.php'</span>);</span><br><span class="line">    xhr.send();<span class="comment">//执行时状态码开始从1到2，三次握手结束才变为2</span></span><br><span class="line">    	 </span><br><span class="line">         <span class="comment">//状态码改变过程</span></span><br><span class="line">        <span class="comment">//new ajax对象，变成1</span></span><br><span class="line">       <span class="comment">//三次握手结束，建立连接，变成2</span></span><br><span class="line">      <span class="comment">//开始传输数据，变成3</span></span><br><span class="line">     <span class="comment">//数据全部传输完，变成4</span></span><br><span class="line">        </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'aaa'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ccc'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//1.php</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    &lt;?php</span></span><br><span class="line"><span class="comment">    sleep(3);</span></span><br><span class="line"><span class="comment">    echo 1;</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><ol>
+<li><p>在早上的时候把git用上了，这下应该不会出现昨晚的沙雕情况了。</p>
+</li>
+<li><p>写个通用管理系统还挺有意思的，就是自己太菜了。</p>
+</li>
+</ol>
+<h1 id="2019-12-27-12-54-21"><a href="#2019-12-27-12-54-21" class="headerlink" title="2019-12-27 12:54:21"></a>2019-12-27 12:54:21</h1><h2 id="express重构"><a href="#express重构" class="headerlink" title="express重构"></a>express重构</h2><p>1.启动服务器</p>
+<p>2.设置各种请求方式的路由</p>
+<p>3.导入外置路由</p>
+<h1 id="2019-12-30-18-29-39"><a href="#2019-12-30-18-29-39" class="headerlink" title="2019-12-30 18:29:39"></a>2019-12-30 18:29:39</h1><p>完成了页面以及数据的渲染，完成修改接口。</p>
 
       
     </div>
@@ -275,8 +812,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:18:00" itemprop="dateModified" datetime="2020-04-01T15:18:00+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-01 18:43:38" itemprop="dateModified" datetime="2020-04-01T18:43:38+08:00">2020-04-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
 
           
 
@@ -295,18 +841,108 @@
 <h1 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h1><p>传输层，字节流服务，报文段。</p>
 <h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><p>实现原因：为了准确无误的传达数据至目标（大文件）</p>
 <ol>
-<li><p>发送端首先发送一个带 SYN 标志的数据包给对方。</p>
-</li>
-<li><p>接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。</p>
-</li>
-<li><p>发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。</p>
-</li>
-<li><p>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</p>
-</li>
+<li>发送端首先发送一个带 SYN 标志的数据包给对方。</li>
+<li>接收端收到后，回传一个带有 SYN/ACK 标志的数据包以示传达确认信息。</li>
+<li>发送端再回传一个带 ACK 标志的数据包，代表“握手”结束。</li>
+<li>若在握手过程中某个阶段莫名中断，TCP 协议会再次以相同的顺序发送相同的数据包。</li>
 </ol>
-<p><img src="%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%5C%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="图解三次握手"></p>
+<img src="/2019/12/23/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E5%9B%BE%E8%A7%A3%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" class="">
+
 <h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><h3 id="data和end事件"><a href="#data和end事件" class="headerlink" title="data和end事件"></a>data和end事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data=<span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">request.on(<span class="string">'data'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">che</span>)</span>&#123;</span><br><span class="line"><span class="comment">//数据的分批传送</span></span><br><span class="line">	data += che;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">request.on(<span class="string">'end'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//分批传送完成</span></span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/%E5%88%9D%E6%8E%A2Express/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/%E5%88%9D%E6%8E%A2Express/" class="post-title-link" itemprop="url">初探Express</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-20 17:19:19" itemprop="dateCreated datePublished" datetime="2019-12-20T17:19:19+08:00">2019-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 18:41:28" itemprop="dateModified" datetime="2020-04-01T18:41:28+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Express"><a href="#Express" class="headerlink" title="Express"></a>Express</h1><h2 id="框架的价值"><a href="#框架的价值" class="headerlink" title="框架的价值"></a>框架的价值</h2><p>工厂化操作，中间件加工</p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><p>额外组成部分，简化工厂流水线。</p>
+<h1 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h1><h2 id="写入cookie"><a href="#写入cookie" class="headerlink" title="写入cookie"></a>写入cookie</h2><p>要求：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//http.js</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line">app.use(cookieParser());</span><br><span class="line"></span><br><span class="line"><span class="comment">//route.js</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//script.js不需要引入中间件</span></span><br></pre></td></tr></table></figure>
+
+<p>route.js中需要引入中间件，http.js中需要使用中间件，这是外置路由导致的原因。</p>
+<p>方式：</p>
+<ol>
+<li><p><code>res.cookie(&#39;name&#39;,&#39;wsq&#39;);</code></p>
+</li>
+<li><p>直接设置响应头</p>
+</li>
+</ol>
+<h2 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h2><p>req.cookies</p>
+<p>不要少了s！！！   </p>
+<p><code>console.log(req.cookies.id);</code></p>
+<h1 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">moment().format(<span class="string">'MMMM Do YYYY, h:mm:ss a'</span>); <span class="comment">// 十二月 29日 2019, 11:33:54 晚上</span></span><br><span class="line">moment().format(<span class="string">'dddd'</span>);                    <span class="comment">// 星期日</span></span><br><span class="line">moment().format(<span class="string">"MMM Do YY"</span>);               <span class="comment">// 12月 29日 19</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="TEMPLATE-ERR"><a href="#TEMPLATE-ERR" class="headerlink" title="TEMPLATE ERR"></a>TEMPLATE ERR</h3><h3 id="template-Cannot-read-property-‘xx’-of-undefined"><a href="#template-Cannot-read-property-‘xx’-of-undefined" class="headerlink" title="template Cannot read property ‘xx’ of undefined"></a>template Cannot read property ‘xx’ of undefined</h3><p> 多余的$符号</p>
+<p>最好的解决办法应该就是好好看看官方的语法规则，并且自己验证一下，应该很快就能发现自己这样的语法连一般加载都不行。</p>
+<img src="/2019/12/20/%E5%88%9D%E6%8E%A2Express/%E7%88%86%E7%82%B8.png" class="">
       
     </div>
 
@@ -356,8 +992,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 16:43:11" itemprop="dateModified" datetime="2020-04-01T16:43:11+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-01 18:40:28" itemprop="dateModified" datetime="2020-04-01T18:40:28+08:00">2020-04-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
 
           
 
@@ -481,6 +1126,222 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/%E8%B5%84%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/%E8%B5%84%E6%BA%90/" class="post-title-link" itemprop="url">学习资源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-20 17:19:19" itemprop="dateCreated datePublished" datetime="2019-12-20T17:19:19+08:00">2019-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 18:37:29" itemprop="dateModified" datetime="2020-04-01T18:37:29+08:00">2020-04-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="待学习教程"><a href="#待学习教程" class="headerlink" title="待学习教程"></a>待学习教程</h1><p><a href="https://how2j.cn/k/tmall-front/tmall-front-790/790.html/" target="_blank" rel="noopener">天猫前端系列教材</a></p>
+<p><a href="https://how2j.cn/k/boostrap/boostrap-tutorial/538.html" target="_blank" rel="noopener">BootStrap系列教程</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">计算机硬件基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-16 11:41:26" itemprop="dateCreated datePublished" datetime="2019-12-16T11:41:26+08:00">2019-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:29:06" itemprop="dateModified" datetime="2020-04-01T19:29:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>不熟悉的概念</strong>：</p>
+<ul>
+<li>指令系统：</li>
+</ul>
+<p>1、叶子过程(叶子函数)，没有调用其他函数的函数(/过程)</p>
+<p>2、帧指针，栈帧的指针</p>
+<p>3、栈帧，保存函数活动记录的栈</p>
+<p>4、扩展操作码编码：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**不允许短码是长码的前缀**</span></span><br><span class="line"><span class="strong">**各指令的操作码一定不能重复**</span></span><br><span class="line"></span><br><span class="line">1111作为标志，表示扩展了操作码:</span><br><span class="line"></span><br><span class="line">这里比较难理解的是既然1111都变成标志了，还扩展个啥，实际上，按照上述的两个原则，这4位本来就不能再用了，扩展实际上并没有扩展字长，而是把地址码挪用了，所以这个标志来表达的是，"我现在要用地址码了"，这时候，16位字长的指令，前4位为1111，后12位中的前4位又能作为操作码了。</span><br><span class="line"></span><br><span class="line">而一开始，只有16位中的前4位是操作码，现在第5-8位也是操作码了，操作码的数量也由16个(算上1111)变成了30个(两个15个，保留两个1111).</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>CPU：</li>
+</ul>
+<p>1、自陷 trap ，预先安排的”异常”事件。</p>
+<p>2、开中断，IF标志位等于一。</p>
+<p>3、微程序 微操作 微指令 微命令 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">微程序可解释机器指令。</span><br><span class="line"></span><br><span class="line">微程序是微指令的序列。</span><br><span class="line"></span><br><span class="line">微指令包含多个微命令。 </span><br><span class="line"></span><br><span class="line">微命令是微操作的控制信号。</span><br><span class="line"></span><br><span class="line">微操作是微命令的执行过程。</span><br></pre></td></tr></table></figure>
+
+<p>4、控制存储器，存放微程序的ROM。</p>
+<p>5、IR，指令寄存器，存放现行指令。</p>
+<p>6、硬连线控制器(组合逻辑控制器，PLA控制器)</p>
+<p>7、固件，为硬件服务的”驱动(与IO模块传送数据的程序)”，使得不同操作系统可以操纵。</p>
+<p>8、扩展器？找不到的概念</p>
+<p>9、imm8，立即数8</p>
+<p>10、多路选择器，</p>
+<p>11、寄存器传送语言，RLT</p>
+<p>12、ALU，算术逻辑单元</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="流水线概述"><a href="#流水线概述" class="headerlink" title="流水线概述"></a>流水线概述</h2><h3 id="流水线深度"><a href="#流水线深度" class="headerlink" title="流水线深度"></a>流水线深度</h3><p>即为流水线的级数大小</p>
+<h3 id="流水线执行时间"><a href="#流水线执行时间" class="headerlink" title="流水线执行时间"></a>流水线执行时间</h3><p>流水线有M段，每多一条指令N，就会产生一个新的流水段T，若是四条(N=4)指令，则多出三个(N-1)流水段，则：</p>
+<p>S=(M+N-1)*T</p>
+<h3 id="适合流水线的指令及特征"><a href="#适合流水线的指令及特征" class="headerlink" title="适合流水线的指令及特征"></a>适合流水线的指令及特征</h3><p>1.指令长度一致</p>
+<p>2.指令格式整齐</p>
+<p>3.采用装入/存储型指令风格</p>
+<h2 id="流水线冒险及其处理"><a href="#流水线冒险及其处理" class="headerlink" title="流水线冒险及其处理"></a>流水线冒险及其处理</h2><h3 id="结构冒险"><a href="#结构冒险" class="headerlink" title="结构冒险"></a>结构冒险</h3><p>硬件资源竞争造成，同一个部件同时被不同指令所用</p>
+<h4 id="结构冒险的处理"><a href="#结构冒险的处理" class="headerlink" title="结构冒险的处理"></a>结构冒险的处理</h4><p>1.数据旁路</p>
+<p>2.设置多个独立的部件来避免硬件冲突</p>
+<h3 id="数据冒险"><a href="#数据冒险" class="headerlink" title="数据冒险"></a>数据冒险</h3><p>又称为数据相关，由后面的指令的输入数据尚未由前面指令产生造成。</p>
+<h4 id="数据冒险的处"><a href="#数据冒险的处" class="headerlink" title="数据冒险的处"></a>数据冒险的处</h4><h5 id="RAW-数据冒险"><a href="#RAW-数据冒险" class="headerlink" title="RAW 数据冒险"></a>RAW 数据冒险</h5><ol>
+<li><p>插入空操作指令 ，nop</p>
+</li>
+<li><p>插入气泡，通过硬件阻塞</p>
+</li>
+<li><p>采用转发技术，将数据通路中生成的中间数据直接转发到ALU的输入端。</p>
+<p>必须在硬件上进行相应的改动。</p>
+</li>
+</ol>
+<h5 id="Load-use-数据冒险"><a href="#Load-use-数据冒险" class="headerlink" title="Load-use 数据冒险"></a>Load-use 数据冒险</h5><ol>
+<li>由编译器在load指令执行前插入nop指令来解决</li>
+<li>在程序编译时进行优化，通过调整指令顺序以避免出现Load-use 现象。</li>
+</ol>
+<h3 id="控制冒险"><a href="#控制冒险" class="headerlink" title="控制冒险"></a>控制冒险</h3><p>当遇到改变指令执行顺序的情况时，流水线中指令的正常执行会被阻塞，这种流水线阻塞现象被称为控制冒险。</p>
+<h4 id="发生场所与相应处理"><a href="#发生场所与相应处理" class="headerlink" title="发生场所与相应处理"></a>发生场所与相应处理</h4><h5 id="1-各类转移指令执行时"><a href="#1-各类转移指令执行时" class="headerlink" title="1. 各类转移指令执行时"></a>1. 各类转移指令执行时</h5><p>延迟损失时间片C，延迟执行周期数</p>
+<p>分支冒险，由指令分支引起的冒险，可由插入空操作指令和插入气泡来解决【消极】</p>
+<p>分支预测【积极】</p>
+<ol>
+<li>简单预测</li>
+</ol>
+<p>一种静态预测方式，升级版是有条件的简单预测。</p>
+<ol start="2">
+<li>动态预测</li>
+</ol>
+<p>利用分支指令发生转移的历史情况来进行预测，并根据实际执行情况动态调整预测位。</p>
+<h5 id="2-异常和中断的出现时"><a href="#2-异常和中断的出现时" class="headerlink" title="2. 异常和中断的出现时"></a>2. 异常和中断的出现时</h5><p>硬件处理办法：</p>
+<ol>
+<li>清除异常指令及其后的所有指令</li>
+<li>保存断点</li>
+<li>将异常处理程序的首地址放入PC输入端</li>
+</ol>
+<h2 id="高级流水线技术"><a href="#高级流水线技术" class="headerlink" title="高级流水线技术"></a>高级流水线技术</h2><h3 id="超流水线"><a href="#超流水线" class="headerlink" title="超流水线"></a>超流水线</h3><p>增加流水线级数，使得更多指令可以重叠执行</p>
+<h3 id="多发射流水"><a href="#多发射流水" class="headerlink" title="多发射流水"></a>多发射流水</h3><p>同时启动多条指令独立运行来提高指令并行性</p>
+<h4 id="超标量处理器"><a href="#超标量处理器" class="headerlink" title="超标量处理器"></a>超标量处理器</h4><p>采用多发射流水线技术的处理器</p>
+<p>IPC 可以用来衡量超标量处理器的性能，它是指每个时钟周期内完成的指令条数，也就是CPI的倒数。</p>
+<h4 id="静态多发射处理器"><a href="#静态多发射处理器" class="headerlink" title="静态多发射处理器"></a>静态多发射处理器</h4><p>通过编译器静态推测来辅助完成”指令打包”和”冒险处理”。</p>
+<p>静态多发射指令，又称为超长指令字</p>
+<h4 id="动态多发射处理器"><a href="#动态多发射处理器" class="headerlink" title="动态多发射处理器"></a>动态多发射处理器</h4><p>在指令执行时由处理器进行流水线调度，完成指令的打包和冒险处理，能在一个时钟周期内执行一条以上指令。</p>
+<h1 id="题型"><a href="#题型" class="headerlink" title="题型"></a>题型</h1><h2 id="三种冒险"><a href="#三种冒险" class="headerlink" title="三种冒险"></a>三种冒险</h2><h2 id="流水线性能分析"><a href="#流水线性能分析" class="headerlink" title="流水线性能分析"></a>流水线性能分析</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -512,8 +1373,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:42:11" itemprop="dateModified" datetime="2020-04-01T15:42:11+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-01 19:13:33" itemprop="dateModified" datetime="2020-04-01T19:13:33+08:00">2020-04-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
 
           
 
@@ -556,7 +1426,8 @@
 <h2 id="W3C和ECMAScript及CommonJS"><a href="#W3C和ECMAScript及CommonJS" class="headerlink" title="W3C和ECMAScript及CommonJS"></a>W3C和ECMAScript及CommonJS</h2><p>W3C的规范是一个浏览器的生产标准，告诉浏览器应该生成什么规格的东西，提供什么API。</p>
 <p>ECMAScript是告诉浏览器怎么写解析引擎解析JS代码。</p>
 <p>CommonJS用于除了浏览器外的所有平台规范，以显示API的更广泛适用性。</p>
-<p><img src="./%E5%88%9D%E6%8E%A2NodeJs/%E8%A7%84%E8%8C%83%E7%AE%A1%E8%BE%96.png" alt="规范管辖"></p>
+<img src="/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/%E8%A7%84%E8%8C%83%E7%AE%A1%E8%BE%96.png" class="">
+
 <h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><p>模块的导出</p>
 <h2 id="exports的使用"><a href="#exports的使用" class="headerlink" title="exports的使用"></a>exports的使用</h2><p>module.exports</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//导出内容为函数</span></span><br><span class="line"><span class="built_in">module</span>.exports = fucntion()&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -609,7 +1480,9 @@
 <li>因为实参传入calls，就要到函数的声明处执行，这样实参就被带到函数声明处了，也就完成了从导出端到导入端的数据传送,</li>
 <li>利用回调函数calls完成数据导出，最终完成，这么麻烦的根本原因是因为异步，必须等数据产生处的异步函数执行完了再返回，而且数据导入处必须等待生产结束，它的函数才能返回，它才能继续执行。</li>
 </ol>
-<p><img src="C:/Users/w9709/Desktop/%E6%88%91%E7%9A%84github/kakapiya/source/_posts/%E5%88%9D%E6%8E%A2NodeJS/Byfunc2data.png" alt="利用回调函数传递数据流程图"></p>
+<img src="/2019/12/14/%E5%88%9D%E6%8E%A2NodeJS/Byfunc2data.png" class="">
+
+
 <h1 id="客户端响应"><a href="#客户端响应" class="headerlink" title="客户端响应"></a>客户端响应</h1><h2 id="获取请求方式"><a href="#获取请求方式" class="headerlink" title="获取请求方式"></a>获取请求方式</h2><p><code>request.method</code></p>
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(request.method=<span class="string">"POST"</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(request.method=<span class="string">"GET"</span>)&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -685,8 +1558,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 14:38:50" itemprop="dateModified" datetime="2020-04-01T14:38:50+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-01 18:40:35" itemprop="dateModified" datetime="2020-04-01T18:40:35+08:00">2020-04-01</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+                </span>
+            </span>
 
           
 
@@ -738,8 +1620,81 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/06/%E4%BE%A0%E9%9A%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/09/06/%E4%BE%A0%E9%9A%90/" class="post-title-link" itemprop="url">侠隐</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-06 14:00:00" itemprop="dateCreated datePublished" datetime="2018-09-06T14:00:00+08:00">2018-09-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 18:35:24" itemprop="dateModified" datetime="2020-04-01T18:35:24+08:00">2020-04-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>&#8195;&#8195;我是第一次完整的看完一部武侠小说，之前也只是对武侠稍稍好奇，只是听说过属于金庸的一句诗“飞雪连天射白鹿，笑书神侠倚碧鸳”。属于别人的老梗我是不愿意继续跟风的，也不想夺人所爱。所以在这里评一评由姜文执导的电影《邪不压正》的原著《侠隐》。电影我没去看，不过我一向对书带来的感官享受更加敏感。这里就想讲一讲张北海故事里的“侠”与“北平”。</p>
+<p>&#8195;&#8195;张北海的侠，是隐士，但不是中国人的隐士，是美国人的隐士，也许和他常年身处海外有关，所写的主人公李大寒（后更名为李天然）便是由美国在华医生马凯收留，后留学美国。这样身世的主人公也方便张北海表现出属于张北海的“侠”。这种侠和看重个人的西方精神相适应。中国有句话叫做“侠之大者，为国为民”。年轻的李大寒没有这种觉悟，他只是一个由私仇而成长的普通青年。唯一不普通的可能只有可以迷倒“北平之花”的脸，和不和常理的男性魅力。在我书读到一半的时候，书里出现的所有适龄女性全部都莫名其妙的对大寒表现出赤裸裸的好感，这应该是属于作者的意淫。但不论如何，对于一向以男性读者为主的侠义小说来讲，这么写倒是无可厚非。况且这与北平，那种温柔、娴静的气质颇为相符，温柔乡恐怕说的就是这个了。再这样的北平下，出现一位颇为散漫的游侠也正合时宜。在张北海的笔下，我常常有一种游离感，他笔下的北平是那么的真实，那么的合理，可是这个侠，尽管作为读者的我有着上帝视角，却觉得他那么的虚幻，那是一种矛盾感，是防止读者过分沉浸的一种屏障，是属于大寒，这个由汉字构成的人物的灵性。我不知道他下一步会在北平做什么，张北海略去很多常见小说中常常会过分细节的描写，如语言，环境，动作。有人说这些构建的是小说的真实感，但是在张北海的笔下，这些仿佛不是那么的重要，他把握的是小说本身的呼吸，和读者的直觉。</p>
+<p>&#8195;&#8195;这是游离感的由来，也是意蕴和未来回味的源头。</p>
+<p>&#8195;&#8195;我从未完整读过一部武侠小说，反倒是小学、初中的时候读过不少的玄幻小说，玄幻小说可以说是吸收了传统武侠小说中最爽快的部分，包括打斗，离奇的经历，人们对超自然力量的向往，对未知世界的好奇，所以当我开始粗粗接触武侠小说的时候，是非常不适应的，缺少了最直接的感官刺激，我感觉到的是冗长的描写，土里土气的招式，没有玄幻小说那么的华丽，简直可以说是无聊。这是我在读《侠隐》前，关于武侠小说的看法。</p>
+<p>&#8195;&#8195;而在《侠隐》后，我看到了一个和现代接轨的、重叠的、真实的江湖，不一样的武侠世界。一个现实中侠士最贴切、最和逻辑的生活。李天然作为这样一个由西方自由、个人文化浸染的留学生和在童年时接受的中国传统师徒文化，族群文化结合的人物，代表着一种理性与感性的融合。对于家仇，他隐忍。对于国恨，不纠缠。李天然他既有属于中国家族文化的责任感和使命感，同时也兼具有对西方个人权利的尊重，超脱于道德。当李天然和玛姬讨论法治的时候，我就想起了一句话。一个人应当有属于自己的道德标准。若这个道德标准是不违反公序良俗，我便认可这种私刑。张北海在一次编者提问中说到，“至于李天然是否会排斥任何打架的机会，我希望我的英雄会加以选择，他应该是那种他知道世间不平之事多如海沙，也知道任何个人（哪怕是他），都无法摆平这世间的不平，这也是为什么他对蓝马二人说，“任它弱水三千，我只取一瓢饮。”该做才做，该做就做。没有任何人，包括我们的侠隐“燕子李三”，可以饮三千弱水。”</p>
+<p>&#8195;&#8195;就是这样的隐士在北平的生活，才让我对江湖有了一点的向往。</p>
+<p align="right">在校车</p>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -806,14 +1761,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
