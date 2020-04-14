@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"scrollpercent":true,"enable":true,"sidebar":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="4-10 算法入门(一)左神的算法课真的让我受益匪浅，在第一节课里，我就有四个巨大的收获。  异或的正确理解 二分查找与无序 没有临时量的交换 对数器  接下来将会详细回忆以上的精彩 排序三个经典排序，选择，冒泡，插入 三个简单的排序很容易的引入了算法的时间，空间复杂度，而插入和冒泡排序很清晰的展现了数据状况对相同时间复杂度算法的实际影响： 插入排序在状况较好的情况下可以达到 $O(n)$，而冒泡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法入门">
+<meta property="og:url" content="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="初出茅庐">
+<meta property="og:description" content="4-10 算法入门(一)左神的算法课真的让我受益匪浅，在第一节课里，我就有四个巨大的收获。  异或的正确理解 二分查找与无序 没有临时量的交换 对数器  接下来将会详细回忆以上的精彩 排序三个经典排序，选择，冒泡，插入 三个简单的排序很容易的引入了算法的时间，空间复杂度，而插入和冒泡排序很清晰的展现了数据状况对相同时间复杂度算法的实际影响： 插入排序在状况较好的情况下可以达到 $O(n)$，而冒泡">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F.png">
+<meta property="og:image" content="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/master%E5%85%AC%E5%BC%8F.png">
+<meta property="article:published_time" content="2020-04-10T14:05:44.000Z">
+<meta property="article:modified_time" content="2020-04-14T12:59:35.841Z">
+<meta property="article:author" content="汪世奇">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>算法入门 | 初出茅庐</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">初出茅庐</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">如履薄冰</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-items">
+
+    <a href="/items" rel="section"><i class="fa fa-sitemap fa-fw"></i>项目</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-10 22:05:44" itemprop="dateCreated datePublished" datetime="2020-04-10T22:05:44+08:00">2020-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-14 20:59:35" itemprop="dateModified" datetime="2020-04-14T20:59:35+08:00">2020-04-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="4-10-算法入门-一"><a href="#4-10-算法入门-一" class="headerlink" title="4-10 算法入门(一)"></a>4-10 算法入门(一)</h1><p>左神的算法课真的让我受益匪浅，在第一节课里，我就有四个巨大的收获。</p>
+<ul>
+<li>异或的正确理解</li>
+<li>二分查找与无序</li>
+<li>没有临时量的交换</li>
+<li>对数器</li>
+</ul>
+<p>接下来将会详细回忆以上的精彩</p>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>三个经典排序，选择，冒泡，插入</p>
+<p>三个简单的排序很容易的引入了算法的时间，空间复杂度，而插入和冒泡排序很清晰的展现了数据状况对相同时间复杂度算法的实际影响：</p>
+<p>插入排序在状况较好的情况下可以达到 $O(n)$，而冒泡则始终是$O(n^2) $</p>
+<h3 id="三种简单排序"><a href="#三种简单排序" class="headerlink" title="三种简单排序"></a>三种简单排序</h3><p><strong>选择排序</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Select_Sort</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> min_index =<span class="number">0</span>;</span><br><span class="line">	<span class="comment">//选择位置</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//遍历数组，判断是否有数小于当前最小值</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">array</span>[j] &lt; <span class="built_in">array</span>[min_index]) &#123; min_index = j; &#125;</span><br><span class="line">		&#125;</span><br><span class="line">		swap(<span class="built_in">array</span>[i], <span class="built_in">array</span>[min_index]);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>冒泡排序</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Bubble_Sort</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[],<span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">array</span>[j - <span class="number">1</span>] &gt; <span class="built_in">array</span>[j]) &#123; swap(<span class="built_in">array</span>[j - <span class="number">1</span>], <span class="built_in">array</span>[j]); &#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入排序</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//插入排序函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insert_Sort</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//开始遍历</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;len; i++)</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="comment">//当前数字的之前的所有数字一个一个遍历</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i<span class="number">-1</span>; j &gt;=<span class="number">0</span>; j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">//若前数大,交换</span></span><br><span class="line">			<span class="keyword">if</span> (<span class="built_in">array</span>[j] &gt; <span class="built_in">array</span>[j+<span class="number">1</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				swap(<span class="built_in">array</span>[j], <span class="built_in">array</span>[j+<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Coding细节"><a href="#Coding细节" class="headerlink" title="Coding细节"></a>Coding细节</h2><h3 id="异或运算扩展"><a href="#异或运算扩展" class="headerlink" title="异或运算扩展"></a>异或运算扩展</h3><p>无进位相加</p>
+<ul>
+<li>无需申请临时变量的交换</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*xp = *xp^*yp</span><br><span class="line">*yp = *yp^*xp</span><br><span class="line">*xp = *xp^*yp</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>异或筛</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//异或筛1.0 【只有一种数是奇数个】</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">XOR_Screen</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> eor = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		eor ^= <span class="built_in">array</span>[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> eor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//异或筛2.0 【只有两种数是奇数个】</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">XOR_Screen_plus</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> eor = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		eor ^= <span class="built_in">array</span>[i];</span><br><span class="line">	&#125;<span class="comment">//此时的eor是两个奇数个的数字间的异或</span></span><br><span class="line">	 <span class="comment">//eor = a ^ b</span></span><br><span class="line">	 <span class="comment">//eor != 0,因为a和b不同，异或值不可能为零</span></span><br><span class="line">	 <span class="comment">//所以必然有一位是1，那么我们取得最右的1</span></span><br><span class="line">	 <span class="keyword">int</span> rightOne = eor &amp; (~eor + <span class="number">1</span>);</span><br><span class="line">	<span class="comment">//此时可以知道两种奇数在哪一位上是不同的</span></span><br><span class="line"></span><br><span class="line">	 <span class="comment">//再把含有rightOne的数异或</span></span><br><span class="line">	 <span class="keyword">int</span> onlyOne = <span class="number">0</span>;</span><br><span class="line">	 <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; j++)</span><br><span class="line">	 &#123;</span><br><span class="line">		 <span class="comment">//此时的与运算是求同，若在rightOne的位置上有1，则这个数就不是a</span></span><br><span class="line">		 <span class="keyword">if</span> ((rightOne&amp;<span class="built_in">array</span>[j])!=<span class="number">0</span>)</span><br><span class="line">		 &#123;<span class="comment">//筛出b</span></span><br><span class="line">			 onlyOne ^= <span class="built_in">array</span>[j];</span><br><span class="line">		 &#125;</span><br><span class="line">	 &#125;</span><br><span class="line">	 <span class="keyword">static</span> <span class="keyword">int</span> a[<span class="number">5</span>];</span><br><span class="line">	 a[<span class="number">0</span>] = onlyOne;</span><br><span class="line">	 a[<span class="number">1</span>] = onlyOne^eor;</span><br><span class="line"></span><br><span class="line">	 <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取得最右的1</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> rightOne = eor &amp; (~eor +<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优化获取中位数</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//位运算的优先级小于算术运算</span></span><br><span class="line">mid = L+(R-L&gt;&gt;<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="二分法的详解与扩展"><a href="#二分法的详解与扩展" class="headerlink" title="二分法的详解与扩展"></a>二分法的详解与扩展</h3><ul>
+<li>在一个有序数组中找某个数是否存在</li>
+</ul>
+<p><strong>二分查找</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二分查找函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Binary_Search</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> L = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> R = len;</span><br><span class="line">	<span class="keyword">int</span> mid_index = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">array</span>[mid_index]==n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">array</span>[mid_index];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (mid_index!=L &amp;&amp; mid_index != R)</span><br><span class="line">	&#123;<span class="comment">//此时只剩两个数</span></span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (n&gt;<span class="built_in">array</span>[mid_index])</span><br><span class="line">		&#123;<span class="comment">//这个数在右边</span></span><br><span class="line">			L = mid_index;</span><br><span class="line">			mid_index = L + (R - L &gt;&gt; <span class="number">1</span>) ;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;<span class="comment">//这个数在左边</span></span><br><span class="line">			R = mid_index;</span><br><span class="line">			mid_index = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">array</span>[mid_index] == n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">array</span>[mid_index];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">array</span>[mid_index+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在一个有序数组中，找&gt;=某个数最左的位置</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//二分查找函数 最左的数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Binary_Search_plus</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> L = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> R = len;</span><br><span class="line">	<span class="keyword">int</span> mid_index = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (mid_index != L)</span><br><span class="line">	&#123;<span class="comment">//此时只剩两个数</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (n &gt; <span class="built_in">array</span>[mid_index])</span><br><span class="line">		&#123;<span class="comment">//这个数在右边</span></span><br><span class="line">			L = mid_index;</span><br><span class="line">			mid_index = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;<span class="comment">//这个数在左边</span></span><br><span class="line">			R = mid_index;</span><br><span class="line">			mid_index = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mid_index + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><a href="https://www.nowcoder.com/questionTerminal/322eb1da892448f4b18d9b21a6d48c99?toCommentId=24223" target="_blank" rel="noopener">局部最小问题</a></strong></li>
+</ul>
+<img src="/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E5%AE%9A%E4%B9%89%E5%B1%80%E9%83%A8%E6%9C%80%E5%B0%8F.png" class="">
+
+<p>1、理解基于数据状况和问题性质进行算法分析</p>
+<p>2、理解局部最小里“拐点”的概念</p>
+<p>递增，递减，单峰型数组是不可能有局部最小的，如果不是上述数组，就一定有局部最小</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//寻找局部最小函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Find_Local_Minima_index</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		1. ‘/’‘\’</span></span><br><span class="line"><span class="comment">		数组的头或尾出现这两种形态直接打印</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		2. 若出现‘\/’情况必有局部最小</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//第一类情况</span></span><br><span class="line">	<span class="keyword">if</span> (len == <span class="number">1</span> || arr[<span class="number">0</span>] &lt; arr[<span class="number">1</span>]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (arr[len] &lt; arr[len - <span class="number">1</span>]) <span class="keyword">return</span> len;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//第二类情况</span></span><br><span class="line">	<span class="keyword">int</span> L= <span class="number">1</span>, R = len<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">int</span> mid = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (L != mid)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (arr[mid] &gt; arr[mid + <span class="number">1</span>])</span><br><span class="line">		&#123;</span><br><span class="line">			L = mid;</span><br><span class="line">			mid = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			R = mid;</span><br><span class="line">			mid = L + (R - L &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> mid + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Master公式"><a href="#Master公式" class="headerlink" title="Master公式"></a>Master公式</h2><p>子过程递归行为缩小规模相等</p>
+<p>参数</p>
+<ul>
+<li>a 调用子过程的次数</li>
+<li>b 缩小规模的倍数</li>
+<li>d N的幂</li>
+</ul>
+<img src="/2020/04/10/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/master%E5%85%AC%E5%BC%8F.png" class="">
+
+<h1 id="4-11-算法入门-二"><a href="#4-11-算法入门-二" class="headerlink" title="4-11 算法入门(二)"></a>4-11 算法入门(二)</h1><h2 id="两种重要排序"><a href="#两种重要排序" class="headerlink" title="两种重要排序"></a>两种重要排序</h2><p>归并排序递归版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//输入函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">input</span><span class="params">(<span class="keyword">int</span> <span class="built_in">array</span>[], <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; <span class="built_in">array</span>[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge_Sort</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> L, <span class="keyword">int</span> R)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (L&lt;R)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> mid = L + ((R - L) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		<span class="comment">//-1层遇到L==R，return</span></span><br><span class="line">		Merge_Sort(arr, L, mid);</span><br><span class="line">		<span class="comment">//-1层遇到L==R，return</span></span><br><span class="line">		Merge_Sort(arr, mid + <span class="number">1</span>, R);</span><br><span class="line">		<span class="comment">//0层开始执行merge</span></span><br><span class="line">		Merge(arr, L, mid, R);</span><br><span class="line">		<span class="comment">//执行完成后,即执行完0层的Mwege_Sort();</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> arr[], <span class="keyword">int</span> L,<span class="keyword">int</span> M,<span class="keyword">int</span> R)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//这就是额外空间O(logN)</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">size</span> = R - L + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> *help = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">size</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> p1 = L;</span><br><span class="line">	<span class="keyword">int</span> p2 = M+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (p1&lt;= M &amp;&amp; p2&lt;=R)</span><br><span class="line">	&#123;</span><br><span class="line">		help[i++] = arr[p1] &lt;= arr[p2] ? arr[p1++] : arr[p2++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p1&lt;=M)</span><br><span class="line">	&#123;</span><br><span class="line">		help[i++] = arr[p1++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p2 &lt;= R)</span><br><span class="line">	&#123;</span><br><span class="line">		help[i++] = arr[p2++];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">size</span>; i++)</span><br><span class="line">	&#123; </span><br><span class="line">		arr[L + i] = help[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">delete</span>[] help;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>归并排序迭代版</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="处理逆序对与小和问题"><a href="#处理逆序对与小和问题" class="headerlink" title="处理逆序对与小和问题"></a>处理逆序对与小和问题</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>堆排序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="堆的数据结构"><a href="#堆的数据结构" class="headerlink" title="堆的数据结构"></a>堆的数据结构</h2><p>大根堆</p>
+<ul>
+<li>heapinsert</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>heapify</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>小根堆</p>
+<ul>
+<li>一次性输入的大根堆实现优化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-12-算法入门-三"><a href="#4-12-算法入门-三" class="headerlink" title="4-12 算法入门(三)"></a>4-12 算法入门(三)</h1><h2 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h2><p>荷兰国旗问题</p>
+<ul>
+<li>快排1.0</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>快排2.0</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>快排3.0 【随机快排】</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="对数器模板"><a href="#对数器模板" class="headerlink" title="对数器模板"></a>对数器模板</h2><p>对数器：利用暴力算法求解后对比来验证更优算法的工具</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="比较器"><a href="#比较器" class="headerlink" title="比较器"></a><a href="https://www.bilibili.com/video/BV1et411b73Z?p=173" target="_blank" rel="noopener">比较器</a></h2><p>利用模板来比较自定义类型，学习容器的使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-13-算法入门-四"><a href="#4-13-算法入门-四" class="headerlink" title="4-13 算法入门(四)"></a>4-13 算法入门(四)</h1><h2 id="桶排序"><a href="#桶排序" class="headerlink" title="桶排序"></a>桶排序</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="排序的比较"><a href="#排序的比较" class="headerlink" title="排序的比较"></a><strong>排序的比较</strong></h2><table>
+<thead>
+<tr>
+<th align="center">算法种类</th>
+<th align="center">时间复杂度</th>
+<th align="center">额外空间</th>
+<th align="center">稳定性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">选择排序</td>
+<td align="center">$O(N^2)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">F</td>
+</tr>
+<tr>
+<td align="center">冒泡排序</td>
+<td align="center">$O(N^2)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">插入排序</td>
+<td align="center">$O(N^2)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">归并排序</td>
+<td align="center">$O(N*log_2N)$</td>
+<td align="center">$O(N)$</td>
+<td align="center">T</td>
+</tr>
+<tr>
+<td align="center">堆排序</td>
+<td align="center">$O(N*log_2N)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">F</td>
+</tr>
+<tr>
+<td align="center">快速排序</td>
+<td align="center">$O(N*log_2N)$</td>
+<td align="center">$O(log_2N)$</td>
+<td align="center">F</td>
+</tr>
+<tr>
+<td align="center">桶排序</td>
+<td align="center">$O(N)$</td>
+<td align="center">$O(N)$</td>
+<td align="center">T</td>
+</tr>
+</tbody></table>
+<p>没有真正全能的排序方法，根据特性选择。</p>
+<h2 id="哈希表和有序表"><a href="#哈希表和有序表" class="headerlink" title="哈希表和有序表"></a>哈希表和有序表</h2><ul>
+<li>HashMap</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>HashSet</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>有序表</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>反转单双向链表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>取得有序链表的公共部分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-14-算法入门-五"><a href="#4-14-算法入门-五" class="headerlink" title="4-14 算法入门(五)"></a>4-14 算法入门(五)</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/10/%E5%88%9D%E6%8E%A2VueJS/" rel="prev" title="在学NodeJS(一)">
+      <i class="fa fa-chevron-left"></i> 在学NodeJS(一)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/13/%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6/" rel="next" title="算法进阶">
+      算法进阶 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-10-算法入门-一"><span class="nav-number">1.</span> <span class="nav-text">4-10 算法入门(一)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">1.1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三种简单排序"><span class="nav-number">1.1.1.</span> <span class="nav-text">三种简单排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding细节"><span class="nav-number">1.2.</span> <span class="nav-text">Coding细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#异或运算扩展"><span class="nav-number">1.2.1.</span> <span class="nav-text">异或运算扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分法的详解与扩展"><span class="nav-number">1.2.2.</span> <span class="nav-text">二分法的详解与扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Master公式"><span class="nav-number">1.3.</span> <span class="nav-text">Master公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-11-算法入门-二"><span class="nav-number">2.</span> <span class="nav-text">4-11 算法入门(二)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#两种重要排序"><span class="nav-number">2.1.</span> <span class="nav-text">两种重要排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理逆序对与小和问题"><span class="nav-number">2.1.1.</span> <span class="nav-text">处理逆序对与小和问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆的数据结构"><span class="nav-number">2.2.</span> <span class="nav-text">堆的数据结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-12-算法入门-三"><span class="nav-number">3.</span> <span class="nav-text">4-12 算法入门(三)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#快排"><span class="nav-number">3.1.</span> <span class="nav-text">快排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数器模板"><span class="nav-number">3.2.</span> <span class="nav-text">对数器模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较器"><span class="nav-number">3.3.</span> <span class="nav-text">比较器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-13-算法入门-四"><span class="nav-number">4.</span> <span class="nav-text">4-13 算法入门(四)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#桶排序"><span class="nav-number">4.1.</span> <span class="nav-text">桶排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序的比较"><span class="nav-number">4.2.</span> <span class="nav-text">排序的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希表和有序表"><span class="nav-number">4.3.</span> <span class="nav-text">哈希表和有序表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-14-算法入门-五"><span class="nav-number">5.</span> <span class="nav-text">4-14 算法入门(五)</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="汪世奇"
+      src="/uploads/logo.png">
+  <p class="site-author-name" itemprop="name">汪世奇</p>
+  <div class="site-description" itemprop="description">阅读·思考·练习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kakapiya" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kakapiya" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:w970934230@gmail.com" title="E-Mail → mailto:w970934230@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">汪世奇</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
