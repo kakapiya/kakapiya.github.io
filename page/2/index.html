@@ -127,7 +127,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">8</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -137,7 +137,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
 
   </li>
         <li class="menu-item menu-item-items">
@@ -168,6 +168,156 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/logo.png">
+      <meta itemprop="name" content="汪世奇">
+      <meta itemprop="description" content="阅读·思考·练习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="初出茅庐">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">计算机硬件基础</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-16 11:41:26" itemprop="dateCreated datePublished" datetime="2019-12-16T11:41:26+08:00">2019-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 19:29:06" itemprop="dateModified" datetime="2020-04-01T19:29:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">技术</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>不熟悉的概念</strong>：</p>
+<ul>
+<li>指令系统：</li>
+</ul>
+<p>1、叶子过程(叶子函数)，没有调用其他函数的函数(/过程)</p>
+<p>2、帧指针，栈帧的指针</p>
+<p>3、栈帧，保存函数活动记录的栈</p>
+<p>4、扩展操作码编码：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**不允许短码是长码的前缀**</span></span><br><span class="line"><span class="strong">**各指令的操作码一定不能重复**</span></span><br><span class="line"></span><br><span class="line">1111作为标志，表示扩展了操作码:</span><br><span class="line"></span><br><span class="line">这里比较难理解的是既然1111都变成标志了，还扩展个啥，实际上，按照上述的两个原则，这4位本来就不能再用了，扩展实际上并没有扩展字长，而是把地址码挪用了，所以这个标志来表达的是，"我现在要用地址码了"，这时候，16位字长的指令，前4位为1111，后12位中的前4位又能作为操作码了。</span><br><span class="line"></span><br><span class="line">而一开始，只有16位中的前4位是操作码，现在第5-8位也是操作码了，操作码的数量也由16个(算上1111)变成了30个(两个15个，保留两个1111).</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>CPU：</li>
+</ul>
+<p>1、自陷 trap ，预先安排的”异常”事件。</p>
+<p>2、开中断，IF标志位等于一。</p>
+<p>3、微程序 微操作 微指令 微命令 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">微程序可解释机器指令。</span><br><span class="line"></span><br><span class="line">微程序是微指令的序列。</span><br><span class="line"></span><br><span class="line">微指令包含多个微命令。 </span><br><span class="line"></span><br><span class="line">微命令是微操作的控制信号。</span><br><span class="line"></span><br><span class="line">微操作是微命令的执行过程。</span><br></pre></td></tr></table></figure>
+
+<p>4、控制存储器，存放微程序的ROM。</p>
+<p>5、IR，指令寄存器，存放现行指令。</p>
+<p>6、硬连线控制器(组合逻辑控制器，PLA控制器)</p>
+<p>7、固件，为硬件服务的”驱动(与IO模块传送数据的程序)”，使得不同操作系统可以操纵。</p>
+<p>8、扩展器？找不到的概念</p>
+<p>9、imm8，立即数8</p>
+<p>10、多路选择器，</p>
+<p>11、寄存器传送语言，RLT</p>
+<p>12、ALU，算术逻辑单元</p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="流水线概述"><a href="#流水线概述" class="headerlink" title="流水线概述"></a>流水线概述</h2><h3 id="流水线深度"><a href="#流水线深度" class="headerlink" title="流水线深度"></a>流水线深度</h3><p>即为流水线的级数大小</p>
+<h3 id="流水线执行时间"><a href="#流水线执行时间" class="headerlink" title="流水线执行时间"></a>流水线执行时间</h3><p>流水线有M段，每多一条指令N，就会产生一个新的流水段T，若是四条(N=4)指令，则多出三个(N-1)流水段，则：</p>
+<p>S=(M+N-1)*T</p>
+<h3 id="适合流水线的指令及特征"><a href="#适合流水线的指令及特征" class="headerlink" title="适合流水线的指令及特征"></a>适合流水线的指令及特征</h3><p>1.指令长度一致</p>
+<p>2.指令格式整齐</p>
+<p>3.采用装入/存储型指令风格</p>
+<h2 id="流水线冒险及其处理"><a href="#流水线冒险及其处理" class="headerlink" title="流水线冒险及其处理"></a>流水线冒险及其处理</h2><h3 id="结构冒险"><a href="#结构冒险" class="headerlink" title="结构冒险"></a>结构冒险</h3><p>硬件资源竞争造成，同一个部件同时被不同指令所用</p>
+<h4 id="结构冒险的处理"><a href="#结构冒险的处理" class="headerlink" title="结构冒险的处理"></a>结构冒险的处理</h4><p>1.数据旁路</p>
+<p>2.设置多个独立的部件来避免硬件冲突</p>
+<h3 id="数据冒险"><a href="#数据冒险" class="headerlink" title="数据冒险"></a>数据冒险</h3><p>又称为数据相关，由后面的指令的输入数据尚未由前面指令产生造成。</p>
+<h4 id="数据冒险的处"><a href="#数据冒险的处" class="headerlink" title="数据冒险的处"></a>数据冒险的处</h4><h5 id="RAW-数据冒险"><a href="#RAW-数据冒险" class="headerlink" title="RAW 数据冒险"></a>RAW 数据冒险</h5><ol>
+<li><p>插入空操作指令 ，nop</p>
+</li>
+<li><p>插入气泡，通过硬件阻塞</p>
+</li>
+<li><p>采用转发技术，将数据通路中生成的中间数据直接转发到ALU的输入端。</p>
+<p>必须在硬件上进行相应的改动。</p>
+</li>
+</ol>
+<h5 id="Load-use-数据冒险"><a href="#Load-use-数据冒险" class="headerlink" title="Load-use 数据冒险"></a>Load-use 数据冒险</h5><ol>
+<li>由编译器在load指令执行前插入nop指令来解决</li>
+<li>在程序编译时进行优化，通过调整指令顺序以避免出现Load-use 现象。</li>
+</ol>
+<h3 id="控制冒险"><a href="#控制冒险" class="headerlink" title="控制冒险"></a>控制冒险</h3><p>当遇到改变指令执行顺序的情况时，流水线中指令的正常执行会被阻塞，这种流水线阻塞现象被称为控制冒险。</p>
+<h4 id="发生场所与相应处理"><a href="#发生场所与相应处理" class="headerlink" title="发生场所与相应处理"></a>发生场所与相应处理</h4><h5 id="1-各类转移指令执行时"><a href="#1-各类转移指令执行时" class="headerlink" title="1. 各类转移指令执行时"></a>1. 各类转移指令执行时</h5><p>延迟损失时间片C，延迟执行周期数</p>
+<p>分支冒险，由指令分支引起的冒险，可由插入空操作指令和插入气泡来解决【消极】</p>
+<p>分支预测【积极】</p>
+<ol>
+<li>简单预测</li>
+</ol>
+<p>一种静态预测方式，升级版是有条件的简单预测。</p>
+<ol start="2">
+<li>动态预测</li>
+</ol>
+<p>利用分支指令发生转移的历史情况来进行预测，并根据实际执行情况动态调整预测位。</p>
+<h5 id="2-异常和中断的出现时"><a href="#2-异常和中断的出现时" class="headerlink" title="2. 异常和中断的出现时"></a>2. 异常和中断的出现时</h5><p>硬件处理办法：</p>
+<ol>
+<li>清除异常指令及其后的所有指令</li>
+<li>保存断点</li>
+<li>将异常处理程序的首地址放入PC输入端</li>
+</ol>
+<h2 id="高级流水线技术"><a href="#高级流水线技术" class="headerlink" title="高级流水线技术"></a>高级流水线技术</h2><h3 id="超流水线"><a href="#超流水线" class="headerlink" title="超流水线"></a>超流水线</h3><p>增加流水线级数，使得更多指令可以重叠执行</p>
+<h3 id="多发射流水"><a href="#多发射流水" class="headerlink" title="多发射流水"></a>多发射流水</h3><p>同时启动多条指令独立运行来提高指令并行性</p>
+<h4 id="超标量处理器"><a href="#超标量处理器" class="headerlink" title="超标量处理器"></a>超标量处理器</h4><p>采用多发射流水线技术的处理器</p>
+<p>IPC 可以用来衡量超标量处理器的性能，它是指每个时钟周期内完成的指令条数，也就是CPI的倒数。</p>
+<h4 id="静态多发射处理器"><a href="#静态多发射处理器" class="headerlink" title="静态多发射处理器"></a>静态多发射处理器</h4><p>通过编译器静态推测来辅助完成”指令打包”和”冒险处理”。</p>
+<p>静态多发射指令，又称为超长指令字</p>
+<h4 id="动态多发射处理器"><a href="#动态多发射处理器" class="headerlink" title="动态多发射处理器"></a>动态多发射处理器</h4><p>在指令执行时由处理器进行流水线调度，完成指令的打包和冒险处理，能在一个时钟周期内执行一条以上指令。</p>
+<h1 id="题型"><a href="#题型" class="headerlink" title="题型"></a>题型</h1><h2 id="三种冒险"><a href="#三种冒险" class="headerlink" title="三种冒险"></a>三种冒险</h2><h2 id="流水线性能分析"><a href="#流水线性能分析" class="headerlink" title="流水线性能分析"></a>流水线性能分析</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -677,7 +827,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -690,7 +840,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
